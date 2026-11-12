@@ -1,0 +1,55 @@
+{
+  "status": "render_source_release_not_deployed",
+  "timezone": "Asia/Kolkata",
+  "day_start": "06:00",
+  "report_interval_minutes": 30,
+  "expected_reports_per_trading_day": 48,
+  "quote_currency": "USDT",
+  "universe": {
+    "source": "CoinMarketCap",
+    "sort": "reported_24h_volume_desc",
+    "limit": 500,
+    "crypto_only": true,
+    "exclude_stocks": true,
+    "refresh_at_ist": "06:00",
+    "top500_acquisition_verified": false
+  },
+  "exchanges": ["Binance", "Bybit", "OKX", "Bitget", "Gate", "KuCoin"],
+  "market_policy": "USDT_FUTURES_FIRST_SPOT_WHEN_VERIFIED_ABSENT",
+  "gainer_baseline": "same_instrument_06:00_IST",
+  "entry": {
+    "discovery": "every_scan_after_daily_baseline",
+    "top_n_per_exchange": 15,
+    "top_n_status": "proposed_interpretation_of_10_to_15",
+    "exchange_condition": "ANY",
+    "minimum_day_gain": "strictly_positive",
+    "rsi_period": 14,
+    "timeframes": ["1h", "4h", "1d"],
+    "timeframe_condition": "ALL",
+    "rsi_min_inclusive": 70,
+    "rsi_max_inclusive": 100,
+    "increasing": "current_completed_bar_gt_previous_completed_bar_same_timeframe",
+    "rsi_rule_source": "EXCHANGE_COMPLETED_CANDLES_USER_APPROVED_2026_11_12",
+    "coinglass_rsi": "SEPARATE_DISPLAYED_LIVE_COLUMNS"
+  },
+  "watchlist": {
+    "retain_until_owner_removes": true,
+    "keep_after_leaving_gainers_or_top500": true,
+    "separate_trading_alerts": false,
+    "below70_priority": "retained_previous_gte70_current_lt70_any_timeframe"
+  },
+  "weekly": {
+    "window_days": 7,
+    "expected_half_hour_observations": 336,
+    "timeframes": ["1h", "4h", "1d"],
+    "all_observed_rsi_between_70_and_100": true,
+    "missing_data_cannot_pass": true,
+    "gainer_consistency_definition": "implementation_default_at_least_once_each_of_seven_complete_IST_trading_days"
+  },
+  "mfi_period": 14,
+  "scheduled_delivery": "XLSX_TELEGRAM_SILENT_DOCUMENT",
+  "command_reports": ["weeklycoin", "expand"],
+  "command_aliases": {"/WEEKLYCOIN": "/weeklycoin", "/EXPANDBTC": "/expand btc", "/DEL(BTC,ETH)": "/del btc,eth", "/DELALL": "/delall"},
+  "hosting": {"provider": "Render", "plan": "free", "literal_forever_browser_guaranteed": false, "48_uninterrupted_reports_guaranteed": false},
+  "durable_external_storage_required": true
+}

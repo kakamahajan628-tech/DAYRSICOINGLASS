@@ -1,0 +1,30 @@
+{
+  "release": "1.0.0-source",
+  "prepared_date_ist": "2026-11-12",
+  "deployment_status": "NOT_DEPLOYED",
+  "offline_tests_passed": 17,
+  "coinglass_browser_check": "544 displayed rows verified locally",
+  "cmc_top500_live_verification": "PENDING; sort validation failed, final retest DNS unavailable",
+  "files": {
+    ".dockerignore": "17f4044ed211c2cd7e8216878b40c231286f9c80ce45bf812909562321dfafc3",
+    ".env.example": "ec8146f94e9fe9023fd48569d983f75cd928fe54a141a2c741f32de5d01affc5",
+    ".gitignore": "8c36b3bfd5308607dc29795d4064847d2a4417c742021d0d1eee547075cffdeb",
+    "Dockerfile": "70ab573a676d89a7b86281627facc88cac7dc56c754a95e74cad8f6620337ce6",
+    "README.md": "78d819fd5cbe4fd79c9f6e2bbc247d01f5da8c9216ce8f662119380bc55e643d",
+    "START_HERE_HINDI.md": "1484ade1e71d9c6dcdba671572b73f82cc9e31586245061f354fa18f07c2cb53",
+    "VALIDATION.md": "52b2d63a946296c22880ccb4408efa535b89f6dd8a698a42e7016eaa4fdd040d",
+    "app.py": "984024ba684c30948f706a5a5f9bef7b5655f434c0b9384704b64814460b42cd",
+    "domain.py": "acd3f7bc2f3822431cc734c4f839268a54314ec2825ac2b5f523fbe7fccc41ac",
+    "engine.py": "3f1c757225b97f93273c7fc1fbcdaa1012933ca85298867206585efd1b12ca4b",
+    "live_check.py": "b64190c5eb0ffac6d53a9f5bc46a563d442095e1f6efdfd7515712869180d217",
+    "render.yaml": "1c93f80a250e85cbba197dcda5a2b91d259ea06099ce08055f7e96874887ec41",
+    "reports.py": "d9a1dc0790211874b0808d602a9601723b06d1544211c50bb5226915528bd396",
+    "requirements.txt": "13a13d47181c663a18985e2d607f65177a5eb6681726920ff819de2b0525f8ef",
+    "requirements_v1.json": "1e3276cc5d1086b8b88a1ad8233b52244f3b4f7551321009f1324bb09a804f07",
+    "run_tests.py": "4a3f99d80a03343ca6031ebd0e5628df80a4099e35915b0d1090996620fbb8f0",
+    "sources.py": "48a6eb665d021783ad7d61a4ee8f85e3c3aeb63806e63d29ed448df02139bc9a",
+    "storage.py": "ab3247afc91903034dc5f352202b7a66ff663389d7b1ccf38650cdebec0500d9",
+    "telegram_api.py": "fdb13d5bef23bd26d4f8943c9e639856aeed1dc9312318a786c84ee01b92485d",
+    "tests/test_release.py": "a3ea426dda1362adaf86d141923a10401b67138dd670f50b032a9cbffc3a1cb5"
+  }
+}
