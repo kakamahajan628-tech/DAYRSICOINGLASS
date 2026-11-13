@@ -9,6 +9,7 @@ from pathlib import Path
 from domain import EXCHANGES, FRAMES, day_start, slot_info, stamp, entry_pass, crosses, indicators
 from reports import make_report
 from sources import Browser, markets
+from memory_guard import container_memory,release_memory
 
 
 def pack(value):
@@ -46,6 +47,7 @@ class Engine:
         latest = self.store.get("meta","latest")
         watches = [w for _,w in self.store.list("watch") if w.get("active")]
         return {"watchlist_count":len(watches),"latest":latest,"timezone":"Asia/Kolkata",
+            "memory":container_memory(),"last_browser_resources":getattr(self.browser,"diagnostics",{}),
             "rule_rsi":"Exchange completed candles, Wilder14; Coinglass separate live columns",
             "delivery":"48 scheduled slots/day; free host interruptions can cause gaps"}
 
@@ -126,6 +128,19 @@ class Engine:
             valid_universe = universe is not None and start-universe["epoch"] < 30*3600
             snapshot["sources"]["CMC universe"] = (str(len(universe["coins"]))+" rows; source "+universe["captured_at"]) if universe else "UNAVAILABLE"
             snapshot["sources"]["CMC admission"] = "AVAILABLE" if valid_universe else "PAUSED: no verified complete universe under 30h old"
+            # Tickers are captured before 06:00 baseline work, then compacted
+            # before Chromium starts. Retained coins outside today's500 stay.
+            needed={c["symbol"] for c in universe["coins"]} if valid_universe else set()
+            needed.update(self.active())
+            baseline_keys=set()
+            for name,exchange in exchanges.items():
+                exchange.catalog_counts={market:len(rows) for market,rows in exchange.catalog.items()}
+                for market,rows in exchange.catalog.items():
+                    exchange.catalog[market]={symbol:row for symbol,row in rows.items() if symbol in needed}
+                    baseline_keys.update("|".join((name,market,row["symbol"])) for row in exchange.catalog[market].values())
+            if baseline:
+                baseline={**baseline,"prices":{k:v for k,v in baseline["prices"].items() if k in baseline_keys}}
+            release_memory()
             try:
                 cg,xhr = self.browser.coinglass()
                 snapshot["sources"]["Coinglass"] = str(len(cg))+" displayed RSI rows; live, separate from rule RSI"
@@ -135,12 +150,14 @@ class Engine:
                 cg = {}
                 snapshot["sources"]["Coinglass"] = "UNAVAILABLE: "+type(error).__name__+" "+str(error)[:120]
                 self.browser.close()
+            snapshot["sources"]["Browser resources"] = getattr(self.browser,"diagnostics",{})
             eligible = {c["symbol"]:c for c in universe["coins"] if c["symbol"] not in universe.get("ambiguous_symbols",[])} if valid_universe else {}
             watch = self.active()
             selected, ranks = {}, {}
             all_symbols = set(eligible) | set(watch)
             for name,exchange in exchanges.items():
-                snapshot["sources"][name] = {"errors":exchange.errors,"futures":len(exchange.catalog["futures"]),"spot":len(exchange.catalog["spot"])}
+                snapshot["sources"][name] = {"errors":exchange.errors,**exchange.catalog_counts,
+                    "retained_target_instruments":sum(len(rows) for rows in exchange.catalog.values())}
                 gainers = []
                 for symbol in sorted(all_symbols):
                     row = dict(exchange.select(symbol))
@@ -242,7 +259,9 @@ class Engine:
             self.save_snapshot(key,snapshot)
             return "FAILED"
         finally:
+            self.browser.close()
             self.store.release("scan")
+            release_memory()
 
     def schedule_rows(self, epoch):
         start = int(day_start(epoch))
@@ -276,8 +295,7 @@ class Engine:
 
     def observations(self, symbol=None, after=0):
         rows = []
-        for key,value in self.store.list("observation",after=after):
-            if symbol and key.split("|",1)[-1] != symbol: continue
+        for key,value in self.store.iter_records("observation",after=after,key_suffix="|"+symbol if symbol else None):
             row = unpack(value)
             if row["epoch"] >= after: rows.append(row)
         return sorted(rows,key=lambda r:r["epoch"])
@@ -286,16 +304,26 @@ class Engine:
         # Seven complete IST trading days, ending at the latest 06:00 baseline.
         end = int(day_start(now))
         expected = set(range(end-336*1800,end,1800))
-        rows = self.observations(after=end-336*1800)
+        summary={symbol:{"valid":set(),"below":set(),"days":set()} for symbol in self.active()}
+        # Stream compressed observations; retain only slot IDs and coverage counters.
+        for key,value in self.store.iter_records("observation",after=end-336*1800):
+            symbol=key.split("|",1)[-1]
+            if symbol not in summary: continue
+            row=unpack(value)
+            slot=row["scheduled"]
+            if slot not in expected or row.get("status")!="OK": continue
+            metrics=row.get("metrics",{})
+            if any(metrics.get(tf,{}).get("rsi") is None for tf in FRAMES): continue
+            state=summary[symbol]
+            state["valid"].add(slot)
+            if any(metrics[tf]["rsi"]<70 for tf in FRAMES): state["below"].add(slot)
+            if row.get("gainer_exchanges"): state["days"].add(row["day"])
         result = []
-        for symbol in self.active():
-            selected = [r for r in rows if r["symbol"]==symbol and r["scheduled"] in expected]
-            valid = {r["scheduled"]:r for r in selected if r.get("status")=="OK" and all(r.get("metrics",{}).get(tf,{}).get("rsi") is not None for tf in FRAMES)}
-            below = sum(any(r["metrics"][tf]["rsi"]<70 for tf in FRAMES) for r in valid.values())
-            gainer_days = {r["day"] for r in valid.values() if r.get("gainer_exchanges")}
-            passed = len(valid)==336 and not below and len(gainer_days)>=7
-            result.append([symbol,"COMPLETE" if len(valid)==336 else "INCOMPLETE",336,len(valid),below,len(gainer_days),
-                "QUALIFIED" if passed else ("INSUFFICIENT_HISTORY" if len(valid)<336 else "NOT_QUALIFIED")])
+        for symbol,state in summary.items():
+            valid,below,days=len(state["valid"]),len(state["below"]),len(state["days"])
+            passed=valid==336 and not below and days>=7
+            result.append([symbol,"COMPLETE" if valid==336 else "INCOMPLETE",336,valid,below,days,
+                "QUALIFIED" if passed else ("INSUFFICIENT_HISTORY" if valid<336 else "NOT_QUALIFIED")])
         return result
 
     def delete(self, symbols=None):
