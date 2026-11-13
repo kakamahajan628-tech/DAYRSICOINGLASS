@@ -41,8 +41,17 @@ class Store:
             connection.execute(statement)
 
     def list(self, kind, after=0):
+        return list(self.iter_records(kind,after=after))
+
+    def iter_records(self,kind,after=0,key_suffix=None):
+        statement=select(self.rows.c.key,self.rows.c.payload).where(self.rows.c.kind==kind,self.rows.c.updated>=after)
+        if key_suffix is not None: statement=statement.where(self.rows.c.key.endswith(key_suffix,autoescape=True))
+        statement=statement.order_by(self.rows.c.key)
         with self.engine.connect() as connection:
-            return [(r[0], r[1]) for r in connection.execute(select(self.rows.c.key, self.rows.c.payload).where(self.rows.c.kind==kind,self.rows.c.updated>=after))]
+            result=connection.execution_options(yield_per=100,stream_results=True).execute(statement)
+            try:
+                for row in result: yield row[0],row[1]
+            finally: result.close()
 
     def lease(self, name, seconds=1200):
         constructor = sqlite_insert if self.engine.dialect.name == "sqlite" else pg_insert
