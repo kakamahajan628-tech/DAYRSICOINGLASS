@@ -4,8 +4,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 PIP_NO_CACHE_DIR=1 \
     NODE_OPTIONS=--max-old-space-size=128 MALLOC_ARENA_MAX=2
 WORKDIR /app
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates libatomic1 libstdc++6 \
+    && pip install --no-cache-dir -r requirements.txt \
+    && python -m playwright --version \
     && python -m playwright install --with-deps --only-shell chromium \
+    && rm -rf /var/lib/apt/lists/* \
     && useradd --create-home --uid 10001 tracker \
     && mkdir -p /tmp/coinglass-data \
     && chown -R tracker:tracker /app /opt/playwright /tmp/coinglass-data
