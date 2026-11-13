@@ -128,6 +128,9 @@ class Engine:
             valid_universe = universe is not None and start-universe["epoch"] < 30*3600
             snapshot["sources"]["CMC universe"] = (str(len(universe["coins"]))+" rows; source "+universe["captured_at"]) if universe else "UNAVAILABLE"
             snapshot["sources"]["CMC admission"] = "AVAILABLE" if valid_universe else "PAUSED: no verified complete universe under 30h old"
+            if valid_universe: snapshot["sources"]["CMC verification"] = universe.get("verification",{})
+            snapshot["sources"]["Admission decision"] = ("PAUSED_CMC_UNAVAILABLE" if not valid_universe else
+                "PAUSED_BASELINE_MISSING" if not baseline else "EVALUATING_VERIFIED_UNIVERSE")
             # Tickers are captured before 06:00 baseline work, then compacted
             # before Chromium starts. Retained coins outside today's500 stay.
             needed={c["symbol"] for c in universe["coins"]} if valid_universe else set()
@@ -175,6 +178,7 @@ class Engine:
                     selected[(symbol,name)]["rank"] = rank
                     if rank <= self.top_n: ranks.setdefault(symbol,[]).append(name)
             computed = {}
+            entry_attempts=retained_attempts=0
             # Existing coins are measured before new admissions, even outside today's top500.
             for symbol in sorted(set(watch)|set(ranks),key=lambda s:(s not in watch,s)):
                 record = watch.get(symbol)
@@ -189,6 +193,8 @@ class Engine:
                         pinned = exchanges[name].select(symbol,(record["market"],record["instrument"]))
                         row = dict(pinned,coin=symbol,exchange=name,day_gain=None)
                     if row.get("price") is None: continue
+                    if record: retained_attempts+=1
+                    else: entry_attempts+=1
                     metric,errors = self.metrics(exchanges[name],row,start)
                     computed[(symbol,name,row["market"],row["symbol"])] = (metric,errors)
                     if not record and entry_pass(metric):
@@ -238,6 +244,9 @@ class Engine:
                         if detail_errors: detail["error"] = ";".join(detail_errors)
                     snapshot["exchange_rows"].append(detail)
             snapshot["gainers"] = [r for r in snapshot["exchange_rows"] if r.get("rank",999999)<=self.top_n]
+            snapshot["sources"]["Candidate evaluation"] = {"verified_universe_coins":len(eligible),"positive_top_gainer_coins":len(ranks),
+                "entry_rule_attempts":entry_attempts,"retained_rule_attempts":retained_attempts,
+                "active_watchlist_coins":len(watch),"candle_requests":self.calls}
             snapshot["coins"].sort(key=lambda x:("BELOW 70" not in x["priority"],x["symbol"]))
             failures = (not cg or not valid_universe or not baseline or any(e.errors for e in exchanges.values())
                 or any(c["status"] != "OK" for c in snapshot["coins"]) or any(r.get("error") for r in snapshot["exchange_rows"]))
