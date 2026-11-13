@@ -176,11 +176,17 @@ def handler_for(service):
             self.send_header("Content-Length",str(len(body)))
             self.send_header("Cache-Control","no-store")
             self.end_headers()
-            self.wfile.write(body)
+            if self.command != "HEAD":
+                self.wfile.write(body)
 
         def permitted(self):
             token = self.headers.get("Authorization","")
             return bool(service.secret) and hmac.compare_digest(token,"Bearer "+service.secret)
+
+        def do_HEAD(self):
+            # Uptime monitors may probe with HEAD. Reuse GET routing/auth/status
+            # and representation headers, but never write the response body.
+            self.do_GET()
 
         def do_GET(self):
             path = self.path.split("?",1)[0]
@@ -188,7 +194,8 @@ def handler_for(service):
             if path == "/ready": return self.send(200 if service.engine else 503,{"ready":service.engine is not None})
             if path == "/":
                 body = b"<!doctype html><html><meta name='viewport' content='width=device-width'><title>Crypto Watchlist</title><body style='font-family:Arial;max-width:650px;margin:10vh auto;padding:24px'><h1>Crypto Watchlist</h1><p>Telegram reports run every 30 minutes. All report times are IST.</p><p><a href='/health'>Service health</a> &middot; <a href='/ready'>Configuration readiness</a></p><p>Source quality and scanner state are available through your owner-only Telegram commands.</p></body></html>"
-                self.send_response(200); self.send_header("Content-Type","text/html; charset=utf-8"); self.send_header("Content-Length",str(len(body))); self.end_headers(); self.wfile.write(body)
+                self.send_response(200); self.send_header("Content-Type","text/html; charset=utf-8"); self.send_header("Content-Length",str(len(body))); self.end_headers()
+                if self.command != "HEAD": self.wfile.write(body)
                 return
             if path == "/status":
                 return self.send(200,service.status()) if self.permitted() else self.send(401,{"error":"Unauthorized"})
