@@ -9,6 +9,7 @@ from urllib.parse import urlencode, urlsplit
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
 from domain import EXCHANGES, FRAMES, num, stamp
+from memory_guard import BrowserMemoryGuard, release_memory
 
 
 def public_json(base, path, **params):
@@ -35,7 +36,9 @@ def public_json(base, path, **params):
             raise ValueError("NETWORK_UNAVAILABLE") from None
 
 
-BASES = {"Binance":("https://fapi.binance.com","https://api.binance.com"),
+# Binance spot market-data host matches BinanceProvider in the user's attached
+# square_desk/providers.py. The separate USDT-futures host is not a spot alias.
+BASES = {"Binance":("https://fapi.binance.com","https://data-api.binance.vision"),
     "Bybit":("https://api.bybit.com",)*2, "OKX":("https://www.okx.com",)*2,
     "Bitget":("https://api.bitget.com",)*2, "Gate":("https://api.gateio.ws/api/v4",)*2,
     "KuCoin":("https://api-futures.kucoin.com","https://api.kucoin.com")}
@@ -254,17 +257,25 @@ class Browser:
     """Created and called only by the engine worker; Playwright is thread-affine."""
     def __init__(self):
         self.runtime = self.context = self.page = None
+        self.browser = None
         self.xhr = {}
+        self.diagnostics = {}
 
     def start(self):
         if self.page and not self.page.is_closed(): return
         from playwright.sync_api import sync_playwright
         self.runtime = sync_playwright().start()
-        kwargs = {"headless":True,"args":["--disable-dev-shm-usage","--no-sandbox","--renderer-process-limit=2","--disable-extensions","--disable-background-networking"]}
+        kwargs = {"headless":True,"args":["--disable-dev-shm-usage","--no-sandbox","--renderer-process-limit=1","--disable-extensions","--disable-background-networking",
+            "--disable-gpu","--disable-webgl","--js-flags=--max-old-space-size=128"]}
         if os.getenv("BROWSER_CHANNEL"): kwargs["channel"] = os.environ["BROWSER_CHANNEL"]
         self.browser = self.runtime.chromium.launch(**kwargs)
-        self.context = self.browser.new_context(locale="en-US",timezone_id="Asia/Kolkata",viewport={"width":1680,"height":1100})
-        self.context.route("**/*",lambda route:route.abort() if route.request.resource_type in ("image","media","font") else route.continue_())
+        self.context = self.browser.new_context(locale="en-US",timezone_id="Asia/Kolkata",viewport={"width":1680,"height":800},service_workers="block")
+        def route_request(route):
+            host=urlsplit(route.request.url).hostname or ""
+            analytics=("google-analytics.com","googletagmanager.com","doubleclick.net","googlesyndication.com","clarity.ms")
+            blocked=route.request.resource_type in ("image","media","font") or any(host==d or host.endswith("."+d) for d in analytics)
+            route.abort() if blocked else route.continue_()
+        self.context.route("**/*",route_request)
         self.page = self.context.new_page()
         self.page.on("response",self.observe)
 
@@ -279,33 +290,26 @@ class Browser:
             self.xhr = {"status":"XHR_NOT_JSON","captured_at":stamp()}
 
     def universe(self):
-        self.start()
-        page = self.page
-        page.goto("https://coinmarketcap.com/",wait_until="domcontentloaded",timeout=60000)
-        # Browser-owned public request, not an authenticated or decrypted private endpoint.
+        # Same public CMC listing JSON; no SPA, Chromium or retained APIResponse bodies.
         all_rows = []
         # CMC has used different public sort parameter spellings. Only accept one
         # when its returned values prove a globally descending volume page.
-        base = "https://api.coinmarketcap.com/data-api/v3/cryptocurrency/listing?"
+        base = "https://api.coinmarketcap.com"
+        path = "/data-api/v3/cryptocurrency/listing"
         sort_key = None
         for candidate in ("volume24h","volume_24h"):
             params = {"start":1,"limit":100,"sortBy":candidate,"sortType":"desc","convert":"USD","cryptoType":"all","tagType":"all"}
-            response = self.context.request.get(base+urlencode(params),timeout=30000)
-            if response.status != 200: continue
-            rows = cmc_rows(response.json())
+            rows = cmc_rows(public_json(base,path,**params))
             if len(rows)>=90 and all(b["volume24h_usd"]<=a["volume24h_usd"] for a,b in zip(rows,rows[1:])):
                 sort_key = candidate
                 break
         if not sort_key: raise ValueError("CMC_VOLUME_SORT_NOT_VERIFIED")
         for offset in range(1,2001,100):
-            url = base+urlencode({"start":offset,"limit":100,"sortBy":sort_key,"sortType":"desc","convert":"USD","cryptoType":"all","tagType":"all"})
-            response = self.context.request.get(url,timeout=30000)
-            if response.status != 200: raise ValueError("CMC_HTTP_"+str(response.status))
-            rows = cmc_rows(response.json())
+            rows = cmc_rows(public_json(base,path,start=offset,limit=100,sortBy=sort_key,sortType="desc",convert="USD",cryptoType="all",tagType="all"))
             if not rows: raise ValueError("CMC_INCOMPLETE_TOP500")
             all_rows.extend(rows)
             if len(all_rows) >= 500: break
-            page.wait_for_timeout(300)
+            time.sleep(.3)
         ids = [r["id"] for r in all_rows]
         if len(set(ids)) != len(ids): raise ValueError("CMC_DUPLICATE_PAGINATION")
         if any(b["volume24h_usd"] > a["volume24h_usd"]*1.02 for a,b in zip(all_rows,all_rows[1:])):
@@ -315,9 +319,25 @@ class Browser:
         if len(selected) != 500: raise ValueError("CMC_INCOMPLETE_TOP500")
         duplicate = {r["symbol"] for r in selected if sum(x["symbol"]==r["symbol"] for x in selected)>1}
         return {"coins":selected,"ambiguous_symbols":sorted(duplicate),"captured_at":stamp(),"epoch":time.time(),
-            "source":"CMC public browser listing; reported 24h USD volume; stock-tag filter; symbol collisions excluded from admission"}
+            "source":"CMC public listing JSON; reported 24h USD volume; stock-tag filter; symbol collisions excluded from admission"}
 
     def coinglass(self):
+        guard=BrowserMemoryGuard().start()
+        try:
+            if guard.exceeded: raise ValueError("COINGLASS_MEMORY_BUDGET_EXCEEDED")
+            result=self._coinglass()
+            if guard.exceeded: raise ValueError("COINGLASS_MEMORY_BUDGET_EXCEEDED")
+            return result
+        except Exception:
+            if guard.exceeded: raise ValueError("COINGLASS_MEMORY_BUDGET_EXCEEDED") from None
+            raise
+        finally:
+            self.close()
+            guard.stop()
+            self.diagnostics=guard.summary()
+            release_memory()
+
+    def _coinglass(self):
         from playwright.sync_api import expect
         self.start()
         page = self.page
@@ -370,8 +390,10 @@ class Browser:
         return result, self.xhr
 
     def close(self):
-        try:
-            if self.context: self.context.close()
-            if self.runtime: self.runtime.stop()
-        finally:
-            self.page = self.context = self.runtime = None
+        # Release every layer even when a browser crashes or an earlier close fails.
+        context,browser,runtime=self.context,self.browser,self.runtime
+        self.page=self.context=self.browser=self.runtime=None
+        for obj,method in ((context,"close"),(browser,"close"),(runtime,"stop")):
+            if obj:
+                try: getattr(obj,method)()
+                except Exception: pass
