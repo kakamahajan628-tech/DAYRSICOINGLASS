@@ -2,3 +2,4 @@ playwright==1.65.0
 SQLAlchemy>=2.0,<2.1
 psycopg[binary]>=3.2,<4
 XlsxWriter>=3.2,<4
+psutil>=7,<8
