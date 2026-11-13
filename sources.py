@@ -12,11 +12,11 @@ from domain import EXCHANGES, FRAMES, num, stamp
 from memory_guard import BrowserMemoryGuard, release_memory
 
 
-def public_json(base, path, **params):
+def public_json(base, path, headers=None, **params):
     url = base+path+("?"+urlencode(params) if params else "")
     for attempt in range(2):
         try:
-            request = Request(url, headers={"User-Agent":"CryptoWatchlist/1.0 public market data", "Accept":"application/json"})
+            request = Request(url, headers={"User-Agent":"CryptoWatchlist/1.0 public market data", "Accept":"application/json",**(headers or {})})
             with urlopen(request, timeout=15) as response:
                 payload = json.load(response)
             if isinstance(payload, dict):
@@ -237,20 +237,29 @@ def markets():
         return dict(zip(EXCHANGES,pool.map(lambda name:Exchange(name).refresh(),EXCHANGES)))
 
 
-def cmc_rows(payload):
+def cmc_rows(payload,include_stocks=False):
     data = payload.get("data",{}).get("cryptoCurrencyList")
     if not isinstance(data,list): raise ValueError("CMC_LISTING_SCHEMA_CHANGED")
     result = []
     for x in data:
         tags = json.dumps(x.get("tags",[])).lower()
         text = (tags+" "+str(x.get("slug", ""))+" "+str(x.get("name", ""))).lower()
-        if any(t in text for t in ("tokenized-stock","tokenized stock","tokenized-equit","stock-token","stock token","equity-token")): continue
+        is_stock=any(t in text for t in ("tokenized-stock","tokenized stock","tokenized-equit","stock-token","stock token","equity-token"))
+        if is_stock and not include_stocks: continue
         quotes = x.get("quotes",[])
         quote = next((q for q in quotes if q.get("name") == "USD"),None) if isinstance(quotes,list) else quotes.get("USD")
         volume = num((quote or {}).get("volume24h"))
         if not x.get("id") or not x.get("symbol") or volume is None: raise ValueError("CMC_ROW_SCHEMA_CHANGED")
         result.append({"id":int(x["id"]),"symbol":x["symbol"].upper(),"name":x["name"],"volume24h_usd":volume})
     return result
+
+
+def volume_order_verified(rows,tolerance=.02):
+    # Small adjacent reversals can occur between quote updates. Grossly different
+    # ordering (such as a market-cap page with volume sort ignored) is rejected.
+    return bool(rows) and all(row["volume24h_usd"]>=0 for row in rows) and all(
+        b["volume24h_usd"]<=a["volume24h_usd"]*(1+tolerance)
+        for a,b in zip(rows,rows[1:]))
 
 
 class Browser:
@@ -290,36 +299,101 @@ class Browser:
             self.xhr = {"status":"XHR_NOT_JSON","captured_at":stamp()}
 
     def universe(self):
+        api_key=os.getenv("CMC_API_KEY","").strip()
+        if api_key: return self.official_universe(api_key)
         # Same public CMC listing JSON; no SPA, Chromium or retained APIResponse bodies.
-        all_rows = []
+        all_rows = {}
+        checked_rows = []
+        seen_ids = set()
+        duplicate_count=0
+        cutoff_closed=False
         # CMC has used different public sort parameter spellings. Only accept one
         # when its returned values prove a globally descending volume page.
         base = "https://api.coinmarketcap.com"
         path = "/data-api/v3/cryptocurrency/listing"
         sort_key = None
-        for candidate in ("volume24h","volume_24h"):
+        probe=None
+        probe_notes=[]
+        for candidate in ("volume_24h","volume24h"):
             params = {"start":1,"limit":100,"sortBy":candidate,"sortType":"desc","convert":"USD","cryptoType":"all","tagType":"all"}
-            rows = cmc_rows(public_json(base,path,**params))
-            if len(rows)>=90 and all(b["volume24h_usd"]<=a["volume24h_usd"] for a,b in zip(rows,rows[1:])):
+            try: payload=public_json(base,path,**params)
+            except ValueError as error:
+                if str(error)=="HTTP_400":
+                    probe_notes.append(candidate+":HTTP400")
+                    continue
+                raise
+            rows=cmc_rows(payload,include_stocks=True)
+            largest=max([1.0]+[b["volume24h_usd"]/a["volume24h_usd"] for a,b in zip(rows,rows[1:]) if a["volume24h_usd"]>0])
+            probe_notes.append(candidate+":"+str(len(rows))+"rows/"+str(round((largest-1)*100,2))+"%up")
+            if len(rows)>=2 and volume_order_verified(rows):
                 sort_key = candidate
+                probe=payload
                 break
-        if not sort_key: raise ValueError("CMC_VOLUME_SORT_NOT_VERIFIED")
+        if not sort_key: raise ValueError("CMC_VOLUME_SORT_NOT_VERIFIED ["+";".join(probe_notes)+"]")
         for offset in range(1,2001,100):
-            rows = cmc_rows(public_json(base,path,start=offset,limit=100,sortBy=sort_key,sortType="desc",convert="USD",cryptoType="all",tagType="all"))
-            if not rows: raise ValueError("CMC_INCOMPLETE_TOP500")
-            all_rows.extend(rows)
-            if len(all_rows) >= 500: break
+            payload=probe if offset==1 else public_json(base,path,start=offset,limit=100,sortBy=sort_key,sortType="desc",convert="USD",cryptoType="all",tagType="all")
+            raw=cmc_rows(payload,include_stocks=True)
+            if not raw: raise ValueError("CMC_INCOMPLETE_TOP500")
+            fresh={r["id"] for r in raw}-seen_ids
+            if len({r["id"] for r in raw})!=len(raw) or len(fresh)<len(raw)*.9:
+                raise ValueError("CMC_DUPLICATE_PAGINATION")
+            duplicate_count+=len(raw)-len(fresh)
+            seen_ids.update(r["id"] for r in raw)
+            checked_rows.extend(raw)
+            if not volume_order_verified(checked_rows): raise ValueError("CMC_VOLUME_SORT_NOT_VERIFIED")
+            rows=cmc_rows(payload)
+            all_rows.update((r["id"],r) for r in rows)
+            # Fetch an extra eligible page past the cutoff, then re-sort locally.
+            # This handles small quote-order reversals and stock exclusions.
+            if len(all_rows)>=600:
+                ranked=sorted(all_rows.values(),key=lambda r:r["volume24h_usd"],reverse=True)
+                cutoff=ranked[499]["volume24h_usd"]
+                if max(r["volume24h_usd"] for r in raw)<cutoff:
+                    cutoff_closed=True
+                    break
+            if len(raw)<100:
+                cutoff_closed=len(all_rows)>=500
+                break
             time.sleep(.3)
-        ids = [r["id"] for r in all_rows]
+        ids = [r["id"] for r in all_rows.values()]
         if len(set(ids)) != len(ids): raise ValueError("CMC_DUPLICATE_PAGINATION")
-        if any(b["volume24h_usd"] > a["volume24h_usd"]*1.02 for a,b in zip(all_rows,all_rows[1:])):
-            raise ValueError("CMC_VOLUME_SORT_NOT_VERIFIED")
         # Re-sort small changes occurring between paged requests, reject ambiguous symbols.
-        selected = sorted(all_rows,key=lambda r:r["volume24h_usd"],reverse=True)[:500]
+        selected = sorted(all_rows.values(),key=lambda r:r["volume24h_usd"],reverse=True)[:500]
         if len(selected) != 500: raise ValueError("CMC_INCOMPLETE_TOP500")
+        if not cutoff_closed: raise ValueError("CMC_CUTOFF_NOT_VERIFIED")
         duplicate = {r["symbol"] for r in selected if sum(x["symbol"]==r["symbol"] for x in selected)>1}
         return {"coins":selected,"ambiguous_symbols":sorted(duplicate),"captured_at":stamp(),"epoch":time.time(),
-            "source":"CMC public listing JSON; reported 24h USD volume; stock-tag filter; symbol collisions excluded from admission"}
+            "source":"CMC public listing JSON; reported 24h USD volume; stock-tag filter; symbol collisions excluded from admission",
+            "verification":{"sort_parameter":sort_key,"adjacent_tolerance_percent":2,"raw_rows_checked":len(checked_rows),
+                "eligible_rows_resorted":len(all_rows),"page_overlap_deduplicated":duplicate_count,"selected":500,"exchange_universe_fallback":False}}
+
+    def official_universe(self,api_key):
+        # Optional documented CMC API. The key travels in a header, never in URLs,
+        # report content or the stored universe. No exchange-derived substitute.
+        payload=public_json("https://pro-api.coinmarketcap.com","/v1/cryptocurrency/listings/latest",
+            headers={"X-CMC_PRO_API_KEY":api_key},start=1,limit=1000,sort="volume_24h",sort_dir="desc",convert="USD")
+        status=payload.get("status",{})
+        if status.get("error_code",0)!=0: raise ValueError("CMC_API_ERROR_"+str(status.get("error_code")))
+        data=payload.get("data")
+        if not isinstance(data,list): raise ValueError("CMC_API_SCHEMA_CHANGED")
+        converted={"data":{"cryptoCurrencyList":[{"id":row.get("id"),"symbol":row.get("symbol"),"name":row.get("name"),
+            "slug":row.get("slug",""),"tags":row.get("tags",[]),"quotes":[{"name":"USD",
+            "volume24h":row.get("quote",{}).get("USD",{}).get("volume_24h")}]} for row in data]}}
+        raw=cmc_rows(converted,include_stocks=True)
+        if not volume_order_verified(raw): raise ValueError("CMC_API_VOLUME_SORT_NOT_VERIFIED")
+        if len({r["id"] for r in raw})!=len(raw): raise ValueError("CMC_API_DUPLICATE_IDS")
+        eligible=cmc_rows(converted)
+        ranked=sorted(eligible,key=lambda r:r["volume24h_usd"],reverse=True)
+        if len(ranked)<500: raise ValueError("CMC_API_INCOMPLETE_TOP500")
+        # Require a verified lower-volume tail beyond the500 crypto cutoff.
+        if len(raw)>=1000 and raw[-1]["volume24h_usd"]>=ranked[499]["volume24h_usd"]:
+            raise ValueError("CMC_API_CUTOFF_NOT_VERIFIED")
+        selected=ranked[:500]
+        duplicate={r["symbol"] for r in selected if sum(x["symbol"]==r["symbol"] for x in selected)>1}
+        return {"coins":selected,"ambiguous_symbols":sorted(duplicate),"captured_at":stamp(),"epoch":time.time(),
+            "source":"CMC official listings/latest; quote.USD.volume_24h; stock-tag exclusions; selected500",
+            "verification":{"provider":"CMC official API","raw_rows_checked":len(raw),"eligible_rows_resorted":len(eligible),
+                "selected":500,"exchange_universe_fallback":False}}
 
     def coinglass(self):
         guard=BrowserMemoryGuard().start()
