@@ -1,0 +1,214 @@
+{
+  "version": "2.0.0",
+  "target": "one free Render Docker web service; PostgreSQL; three processes; Coinglass optional/default disabled",
+  "input_archive_sha256": "8a61904eb2d558a13db6f00b52da6141af0976d7660763f53102ac7d5765c2ce",
+  "validation": {
+    "local_tests": 69,
+    "local_test_status": "PASS",
+    "browser_desktop_mobile": "PASS",
+    "live_BTC_timeframes": "17/18; KuCoin 1D gap remains unavailable",
+    "live_CMC": "7878 unique records, complete reported count, selected500, captured 2026-11-24 IST",
+    "linux_docker_build": "CI configured, not locally executed",
+    "postgres_integration": "CI configured, not locally executed",
+    "render_live_deploy": "not performed",
+    "production_backup_restore": "not performed"
+  },
+  "files": {
+    ".dockerignore": {
+      "bytes": 132,
+      "sha256": "579280701c81d071238f21f10d952a4253e6bcd606cd5398d2b5f468875312cc"
+    },
+    ".env.example": {
+      "bytes": 847,
+      "sha256": "9f90cbba88c1719b3535c43733eaaf4d4b8178d1d898974362b1deb4f50b3db2"
+    },
+    ".github/workflows/backup.yml": {
+      "bytes": 1222,
+      "sha256": "63950b3aa6a5ff30c1da1c29f147b123d59db207356519bc3ad0e67d60ff4586"
+    },
+    ".github/workflows/ci.yml": {
+      "bytes": 1062,
+      "sha256": "f5eb90bc97d7f45cf9f6b8b308fa8c4f6b766a211579cd3869bfdee06f15b164"
+    },
+    ".gitignore": {
+      "bytes": 123,
+      "sha256": "995d61a639685833cc0604fb7a5df9fe28403a979d38b38a2df8b10a9d34ca7f"
+    },
+    "Dockerfile": {
+      "bytes": 1178,
+      "sha256": "84db5ac8b98eeae5c4e11e2eaf40608abdd14bbd25b27180b170c5cd0191403f"
+    },
+    "README.md": {
+      "bytes": 13740,
+      "sha256": "f836b680e255f6065cd76fef192e92259f70ef9adec90694e7858685f4690ddd"
+    },
+    "START_HERE_HINDI.md": {
+      "bytes": 4065,
+      "sha256": "83e509532400a2c55ba4cb671e366f8723b5936b670e3aebb39178ce9ebbb802"
+    },
+    "VALIDATION.md": {
+      "bytes": 4399,
+      "sha256": "3ad0318f41e216ff91173eddc83530214408cc4f1f68676c4dc6742502457f98"
+    },
+    "app.py": {
+      "bytes": 15375,
+      "sha256": "e225c7741a2f90079233ae0df4afcee1d3921b0d34162de347bc7d8c1d324df1"
+    },
+    "backup.py": {
+      "bytes": 3871,
+      "sha256": "a848229b939953cc64dcda732ee1f311d0e4c273de56d2b6e0470f2417f73073"
+    },
+    "charts.py": {
+      "bytes": 1360,
+      "sha256": "191727d91545d6e157d35bea7e7f74f2f085e8d6d3921462c33907878a81c914"
+    },
+    "contracts.py": {
+      "bytes": 4374,
+      "sha256": "b6ba6201f9d7dceb3cf14c6f17a880b6b8a157622a0bbc4456b0ba4361da184f"
+    },
+    "domain.py": {
+      "bytes": 4032,
+      "sha256": "c5e57d5d2d8ab0927992978fed61102b41721a81e3e1d497e04f3c1866beaec5"
+    },
+    "engine.py": {
+      "bytes": 35952,
+      "sha256": "3f0ec8f57f6555fb95cebb2029a27d5d0bc044a433b490aef87244e9d870be6e"
+    },
+    "health.py": {
+      "bytes": 4407,
+      "sha256": "c2c7f176fc1b1c23556fa95bcb5c181a1fa90fb50451d9cd0a81b7289e0930de"
+    },
+    "live_check.py": {
+      "bytes": 2361,
+      "sha256": "7359fbb6ac00e66ce13579ea60446031ecf7b72ffaeac5d75847dc71475c255f"
+    },
+    "memory_guard.py": {
+      "bytes": 3577,
+      "sha256": "ff077b89e4cfc4c87285b526092c52a53580ea4bc08b34543085560772240809"
+    },
+    "quality.py": {
+      "bytes": 1559,
+      "sha256": "c77970a2f031bb909eff98d248d915204721d26c9267522403a0d274519f465a"
+    },
+    "render.yaml": {
+      "bytes": 698,
+      "sha256": "c5b1824e9bff05d418ecd4ca3e0ba4b1c08e26bf5cbb3ef898b3ad6e333070df"
+    },
+    "reports.py": {
+      "bytes": 11808,
+      "sha256": "fa0b0e88841275ba8603390639ad48db24a39b3ec1bb21a342f4dd644e1f8035"
+    },
+    "requirements.txt": {
+      "bytes": 112,
+      "sha256": "04fd63157e1f4aca390f6314691321d6b15b38113a94fd91bbebc87ed6263403"
+    },
+    "research.py": {
+      "bytes": 7768,
+      "sha256": "ecc41d7d1077cf8dff9295df416f3d3334b339c2d099737f59cd22abfa0977ac"
+    },
+    "run_tests.py": {
+      "bytes": 468,
+      "sha256": "4a3f99d80a03343ca6031ebd0e5628df80a4099e35915b0d1090996620fbb8f0"
+    },
+    "serve.py": {
+      "bytes": 1661,
+      "sha256": "92cf9b05210f05627adf1249d43f96ec21ea3e6390df3f2456f2ee060b6dfc1b"
+    },
+    "sources.py": {
+      "bytes": 31929,
+      "sha256": "e38359caabcc3c536151e14403d444487dc1bc18b5b105c3d2451a011c0bf09b"
+    },
+    "storage.py": {
+      "bytes": 11105,
+      "sha256": "6fe509c4a8efea322bc74343a85e35ff11eb098450b0a292aee95f87c4c75215"
+    },
+    "telegram_api.py": {
+      "bytes": 2664,
+      "sha256": "f6197e4ff3036388857adb8406b4a95e43cecefcd7b7c2bd18a51f92dae6a5c6"
+    },
+    "tests/fixtures/2026-11-24/binance_futures.json": {
+      "bytes": 8032,
+      "sha256": "d078b9b7eef9491f72c7c7896233d2cd9d69c7768b4e03c0b5584969b56493e4"
+    },
+    "tests/fixtures/2026-11-24/binance_spot.json": {
+      "bytes": 8261,
+      "sha256": "2305d14795eea24b381001a6ff0551f6140107a38d157486b0a339e0d4f92e37"
+    },
+    "tests/fixtures/2026-11-24/bitget_futures.json": {
+      "bytes": 20168,
+      "sha256": "c85cf9064c5ef42e402b5821cb5eeba427ed9ec031f25eaf820117dbf2065dd7"
+    },
+    "tests/fixtures/2026-11-24/bitget_spot.json": {
+      "bytes": 18656,
+      "sha256": "0291171e69e54677c1aa6156fe2516e46ceccc00b57eaf96f622e9b994f1a1ff"
+    },
+    "tests/fixtures/2026-11-24/bybit_futures.json": {
+      "bytes": 8413,
+      "sha256": "7950e11fc64a08d1e03d1d38d2c5ddce5e9e97de632cfee6d5e955eff0eb8b4b"
+    },
+    "tests/fixtures/2026-11-24/bybit_spot.json": {
+      "bytes": 5345,
+      "sha256": "7f69b1e3ccd14934cb6640e9a77b8c45e1f5f494cbc3e720feb2ef32f5be34bf"
+    },
+    "tests/fixtures/2026-11-24/gate_futures.json": {
+      "bytes": 6954,
+      "sha256": "978c5ff58d00680d68ab0bd332c5b5d3e3ae44320b622fe6d04ebe5f0ec659d2"
+    },
+    "tests/fixtures/2026-11-24/gate_spot.json": {
+      "bytes": 3697,
+      "sha256": "e7ae2d4aa9bb32a50b45f8acc08bb6d06e041ec5346ad12d75c6e31f1abdc386"
+    },
+    "tests/fixtures/2026-11-24/kucoin_futures.json": {
+      "bytes": 8306,
+      "sha256": "7fba6ab893bd68f04d69f8f21972650d284abd380b2dadf9ea6be045b1bb7907"
+    },
+    "tests/fixtures/2026-11-24/kucoin_spot.json": {
+      "bytes": 5643,
+      "sha256": "2c9ce91ec8b0f7091a7d7d11edcaaaf4ff7b6c545c75e66fa96bb53ef2e90cec"
+    },
+    "tests/fixtures/2026-11-24/okx_futures.json": {
+      "bytes": 6712,
+      "sha256": "dc29d65693ba4111b4aed3c67ee18ec5b8740567923f499d84356c67e536b00f"
+    },
+    "tests/fixtures/2026-11-24/okx_spot.json": {
+      "bytes": 6742,
+      "sha256": "e04d69e50d0edc047a5015a14fa2fdb9fa6458beee28700d447e90b537cbbdbd"
+    },
+    "tests/postgres_integration.py": {
+      "bytes": 1877,
+      "sha256": "547a81246d39b1c7984e18486c8ecf0fa0bf5f79a03a884f0eecc64fe98b6fb9"
+    },
+    "tests/test_platform.py": {
+      "bytes": 17761,
+      "sha256": "0e1d19a0b7ecc1a67c7951599769f21f0023e5c5c2e170f6d40e3b7f99b6d25b"
+    },
+    "tests/test_regressions.py": {
+      "bytes": 14484,
+      "sha256": "2ab3e145e5979983c50f76f029ae7f13f8e612bbc874068ece6ec20eff1f7ea6"
+    },
+    "tests/test_release.py": {
+      "bytes": 14828,
+      "sha256": "f0f105d1c4fcf62f0ad7bff160c911acdab7e2cec9ec478c999e36a0ddf13750"
+    },
+    "validation/live-preflight-2026-11-24.json": {
+      "bytes": 5841,
+      "sha256": "24ccaabb46dfb400e027d2217b46b42eecdeebb329a97d8cce32bec816cf80de"
+    },
+    "validation/local-tests.txt": {
+      "bytes": 8993,
+      "sha256": "4678ac4d325dd5091e954c0432509af4961be7a909ec9ebd75e7a6930b727363"
+    },
+    "web/dashboard.html": {
+      "bytes": 3542,
+      "sha256": "59808fad60cd34a4e4edff6cad853d6c032660e9652923729188ab5951d2b0bf"
+    },
+    "web/dashboard.js": {
+      "bytes": 5387,
+      "sha256": "884e91e4b4c189ce583eede2a29dfe5878d003e914f7402eef677a7ab62f81d4"
+    },
+    "worker.py": {
+      "bytes": 6183,
+      "sha256": "52b826fad6c1c43191a22d9f7e496029c1d22b42911e82910977e5f377e731d9"
+    }
+  }
+}

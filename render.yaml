@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: coinglass-watchlist
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: RUN_SECRET
+        generateValue: true
+      - key: DASHBOARD_PASSWORD
+        sync: false
+      - key: COINGLASS_ENABLED
+        value: "false"
+      - key: SYSTEM_ALERTS_ENABLED
+        value: "true"
+      - key: TOP_N
+        value: "15"
+      - key: SCAN_BUDGET_SECONDS
+        value: "900"
+      - key: DATA_DIR
+        value: /tmp/coinglass-data
