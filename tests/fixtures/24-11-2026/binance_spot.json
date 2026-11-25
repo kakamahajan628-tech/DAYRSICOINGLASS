@@ -1,0 +1,274 @@
+{
+  "recorded_at": "2026-11-24T20:31:33+05:30",
+  "source_bases": [
+    "https://fapi.binance.com",
+    "https://data-api.binance.vision"
+  ],
+  "requests": [
+    {
+      "market": "spot",
+      "path": "/api/v3/exchangeInfo",
+      "params": {
+        "permissions": "SPOT",
+        "showPermissionSets": "false",
+        "symbolStatus": "TRADING"
+      },
+      "response": {
+        "timezone": "UTC",
+        "serverTime": 1795532488718,
+        "rateLimits": [
+          {
+            "rateLimitType": "REQUEST_WEIGHT",
+            "interval": "MINUTE",
+            "intervalNum": 1,
+            "limit": 6000
+          },
+          {
+            "rateLimitType": "ORDERS",
+            "interval": "SECOND",
+            "intervalNum": 10,
+            "limit": 100
+          },
+          {
+            "rateLimitType": "ORDERS",
+            "interval": "DAY",
+            "intervalNum": 1,
+            "limit": 200000
+          }
+        ],
+        "exchangeFilters": [],
+        "symbols": [
+          {
+            "symbol": "BTCUSDT",
+            "status": "TRADING",
+            "baseAsset": "BTC",
+            "baseAssetPrecision": 8,
+            "quoteAsset": "USDT",
+            "quotePrecision": 8,
+            "quoteAssetPrecision": 8,
+            "baseCommissionPrecision": 8,
+            "quoteCommissionPrecision": 8,
+            "orderTypes": [
+              "LIMIT",
+              "LIMIT_MAKER",
+              "MARKET",
+              "STOP_LOSS",
+              "STOP_LOSS_LIMIT",
+              "TAKE_PROFIT",
+              "TAKE_PROFIT_LIMIT"
+            ],
+            "icebergAllowed": true,
+            "ocoAllowed": true,
+            "otoAllowed": true,
+            "opoAllowed": true,
+            "quoteOrderQtyMarketAllowed": true,
+            "allowTrailingStop": true,
+            "cancelReplaceAllowed": true,
+            "amendAllowed": true,
+            "pegInstructionsAllowed": true,
+            "marketQuoteNotionalLimitAllowed": false,
+            "limitQuoteNotionalLimitAllowed": false,
+            "isSpotTradingAllowed": true,
+            "isMarginTradingAllowed": true,
+            "filters": [
+              {
+                "filterType": "PRICE_FILTER",
+                "minPrice": "0.01000000",
+                "maxPrice": "1000000.00000000",
+                "tickSize": "0.01000000"
+              },
+              {
+                "filterType": "LOT_SIZE",
+                "minQty": "0.00001000",
+                "maxQty": "9000.00000000",
+                "stepSize": "0.00001000"
+              },
+              {
+                "filterType": "ICEBERG_PARTS",
+                "limit": 100
+              }
+            ],
+            "permissions": [],
+            "permissionSets": [],
+            "defaultSelfTradePreventionMode": "EXPIRE_MAKER",
+            "allowedSelfTradePreventionModes": [
+              "EXPIRE_TAKER",
+              "EXPIRE_MAKER",
+              "EXPIRE_BOTH",
+              "DECREMENT",
+              "TRANSFER"
+            ]
+          },
+          {
+            "symbol": "ETHBTC",
+            "status": "TRADING",
+            "baseAsset": "ETH",
+            "baseAssetPrecision": 8,
+            "quoteAsset": "BTC",
+            "quotePrecision": 8,
+            "quoteAssetPrecision": 8,
+            "baseCommissionPrecision": 8,
+            "quoteCommissionPrecision": 8,
+            "orderTypes": [
+              "LIMIT",
+              "LIMIT_MAKER",
+              "MARKET",
+              "STOP_LOSS",
+              "STOP_LOSS_LIMIT",
+              "TAKE_PROFIT",
+              "TAKE_PROFIT_LIMIT"
+            ],
+            "icebergAllowed": true,
+            "ocoAllowed": true,
+            "otoAllowed": true,
+            "opoAllowed": true,
+            "quoteOrderQtyMarketAllowed": true,
+            "allowTrailingStop": true,
+            "cancelReplaceAllowed": true,
+            "amendAllowed": true,
+            "pegInstructionsAllowed": true,
+            "marketQuoteNotionalLimitAllowed": false,
+            "limitQuoteNotionalLimitAllowed": false,
+            "isSpotTradingAllowed": true,
+            "isMarginTradingAllowed": true,
+            "filters": [
+              {
+                "filterType": "PRICE_FILTER",
+                "minPrice": "0.00001000",
+                "maxPrice": "922327.00000000",
+                "tickSize": "0.00001000"
+              },
+              {
+                "filterType": "LOT_SIZE",
+                "minQty": "0.00100000",
+                "maxQty": "100000.00000000",
+                "stepSize": "0.00100000"
+              },
+              {
+                "filterType": "ICEBERG_PARTS",
+                "limit": 100
+              }
+            ],
+            "permissions": [],
+            "permissionSets": [],
+            "defaultSelfTradePreventionMode": "EXPIRE_MAKER",
+            "allowedSelfTradePreventionModes": [
+              "EXPIRE_TAKER",
+              "EXPIRE_MAKER",
+              "EXPIRE_BOTH",
+              "DECREMENT",
+              "TRANSFER"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "market": "spot",
+      "path": "/api/v3/ticker/24hr",
+      "params": {},
+      "response": [
+        {
+          "symbol": "BTCUSDT",
+          "priceChange": "-2596.25000000",
+          "priceChangePercent": "-4.120",
+          "weightedAvgPrice": "60924.03022781",
+          "prevClosePrice": "63018.25000000",
+          "lastPrice": "60422.00000000",
+          "lastQty": "0.01090000",
+          "bidPrice": "60422.00000000",
+          "bidQty": "0.95979000",
+          "askPrice": "60422.01000000",
+          "askQty": "0.46139000",
+          "openPrice": "63018.25000000",
+          "highPrice": "63666.01000000",
+          "lowPrice": "59390.86000000",
+          "volume": "22393.79057000",
+          "quoteVolume": "1364319973.60200490",
+          "openTime": 1795446091012,
+          "closeTime": 1795532491012,
+          "firstId": 6901862477,
+          "lastId": 6907131759,
+          "count": 5269283
+        },
+        {
+          "symbol": "ETHBTC",
+          "priceChange": "-0.00025000",
+          "priceChangePercent": "-0.884",
+          "weightedAvgPrice": "0.02813843",
+          "prevClosePrice": "0.02828000",
+          "lastPrice": "0.02803000",
+          "lastQty": "0.03100000",
+          "bidPrice": "0.02802000",
+          "bidQty": "7.08800000",
+          "askPrice": "0.02803000",
+          "askQty": "76.14200000",
+          "openPrice": "0.02828000",
+          "highPrice": "0.02850000",
+          "lowPrice": "0.02787000",
+          "volume": "9920.49000000",
+          "quoteVolume": "279.14704625",
+          "openTime": 1795446090928,
+          "closeTime": 1795532490928,
+          "firstId": 534930938,
+          "lastId": 534972462,
+          "count": 41525
+        }
+      ]
+    },
+    {
+      "market": "spot",
+      "path": "/api/v3/klines",
+      "params": {
+        "symbol": "BTCUSDT",
+        "interval": "1h",
+        "limit": 200
+      },
+      "response": [
+        [
+          1794816000000,
+          "64995.13000000",
+          "64995.28000000",
+          "64430.00000000",
+          "64464.95000000",
+          "522.82430000",
+          1794819599999,
+          "33789114.86169730",
+          147864,
+          "228.88030000",
+          "14791222.26785950",
+          "0"
+        ],
+        [
+          1794819600000,
+          "64464.95000000",
+          "64540.01000000",
+          "64128.00000000",
+          "64327.77000000",
+          "841.08226000",
+          1794823199999,
+          "54118280.44726720",
+          229527,
+          "393.75014000",
+          "25336173.83537650",
+          "0"
+        ],
+        [
+          1794823200000,
+          "64327.77000000",
+          "64697.20000000",
+          "64290.00000000",
+          "64574.83000000",
+          "730.85851000",
+          1794826799999,
+          "47109145.24333640",
+          166104,
+          "332.82072000",
+          "21457081.75496500",
+          "0"
+        ]
+      ]
+    }
+  ],
+  "result": "PASS"
+}

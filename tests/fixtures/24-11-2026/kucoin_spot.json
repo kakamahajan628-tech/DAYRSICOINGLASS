@@ -1,0 +1,183 @@
+{
+  "recorded_at": "2026-11-24T20:32:01+05:30",
+  "source_bases": [
+    "https://api-futures.kucoin.com",
+    "https://api.kucoin.com"
+  ],
+  "requests": [
+    {
+      "market": "spot",
+      "path": "/api/v1/market/allTickers",
+      "params": {},
+      "response": {
+        "code": "200000",
+        "data": {
+          "time": 1795532519657,
+          "ticker": [
+            {
+              "symbol": "BTC-USDT",
+              "symbolName": "BTC-USDT",
+              "buy": "60388.9",
+              "bestBidSize": "0.0005",
+              "sell": "60389",
+              "bestAskSize": "1.16496441",
+              "changeRate": "-0.0407",
+              "changePrice": "-2566.2",
+              "open": "62955.2",
+              "high": "63670.5",
+              "low": "59390.6",
+              "vol": "5639.37617196",
+              "volValue": "343373568.743338708",
+              "last": "60389",
+              "lastSize": "0.0005",
+              "averagePrice": "61971.90584426",
+              "takerFeeRate": "0.001",
+              "makerFeeRate": "0.001",
+              "takerCoefficient": "1",
+              "makerCoefficient": "1",
+              "priceChange": "-2566.2",
+              "priceChangePercent": "-0.0407"
+            },
+            {
+              "symbol": "NEO-BTC",
+              "symbolName": "NEO-BTC",
+              "buy": "0.0000256",
+              "bestBidSize": "316.376029",
+              "sell": "0.0000258",
+              "bestAskSize": "619.78725",
+              "changeRate": "0",
+              "changePrice": "0",
+              "open": "0.0000257",
+              "high": "0.0000262",
+              "low": "0.000025",
+              "vol": "1369.384934",
+              "volValue": "0.0352349934998",
+              "last": "0.0000257",
+              "lastSize": "0.056498",
+              "averagePrice": "0.00002528",
+              "takerFeeRate": "0.001",
+              "makerFeeRate": "0.001",
+              "takerCoefficient": "1",
+              "makerCoefficient": "1",
+              "priceChange": "0",
+              "priceChangePercent": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "market": "spot",
+      "path": "/api/v2/symbols",
+      "params": {},
+      "response": {
+        "code": "200000",
+        "data": [
+          {
+            "symbol": "BTC-USDT",
+            "name": "BTC-USDT",
+            "baseCurrency": "BTC",
+            "quoteCurrency": "USDT",
+            "feeCurrency": "USDT",
+            "market": "USDS",
+            "baseMinSize": "0.00001",
+            "quoteMinSize": "0.1",
+            "baseMaxSize": "10000000000",
+            "quoteMaxSize": "99999999",
+            "baseIncrement": "0.00000001",
+            "quoteIncrement": "0.000001",
+            "priceIncrement": "0.1",
+            "priceLimitRate": "0.01",
+            "minFunds": "0.1",
+            "isMarginEnabled": true,
+            "enableTrading": true,
+            "feeCategory": 1,
+            "makerFeeCoefficient": "1.00",
+            "takerFeeCoefficient": "1.00",
+            "st": false,
+            "callauctionIsEnabled": false,
+            "callauctionPriceFloor": null,
+            "callauctionPriceCeiling": null,
+            "callauctionFirstStageStartTime": null,
+            "callauctionSecondStageStartTime": null,
+            "callauctionThirdStageStartTime": null,
+            "tradingStartTime": null
+          },
+          {
+            "symbol": "FET-BTC",
+            "name": "FET-BTC",
+            "baseCurrency": "FET",
+            "quoteCurrency": "BTC",
+            "feeCurrency": "BTC",
+            "market": "BTC",
+            "baseMinSize": "0.1",
+            "quoteMinSize": "0.00001",
+            "baseMaxSize": "10000000000",
+            "quoteMaxSize": "99999999",
+            "baseIncrement": "0.0001",
+            "quoteIncrement": "0.000000001",
+            "priceIncrement": "0.000000001",
+            "priceLimitRate": "0.08",
+            "minFunds": "0.000001",
+            "isMarginEnabled": false,
+            "enableTrading": true,
+            "feeCategory": 1,
+            "makerFeeCoefficient": "1.00",
+            "takerFeeCoefficient": "1.00",
+            "st": false,
+            "callauctionIsEnabled": false,
+            "callauctionPriceFloor": null,
+            "callauctionPriceCeiling": null,
+            "callauctionFirstStageStartTime": null,
+            "callauctionSecondStageStartTime": null,
+            "callauctionThirdStageStartTime": null,
+            "tradingStartTime": null
+          }
+        ]
+      }
+    },
+    {
+      "market": "spot",
+      "path": "/api/v1/market/candles",
+      "params": {
+        "symbol": "BTC-USDT",
+        "type": "1hour",
+        "startAt": 1794808920,
+        "endAt": 1795532520
+      },
+      "response": {
+        "code": "200000",
+        "data": [
+          [
+            "1795532400",
+            "60430.4",
+            "60388.3",
+            "60526.2",
+            "60388.3",
+            "6.48848046",
+            "392133.015344959"
+          ],
+          [
+            "1795528800",
+            "60015.6",
+            "60437.8",
+            "60684.8",
+            "59984.4",
+            "168.15710104",
+            "10147799.208599142"
+          ],
+          [
+            "1795525200",
+            "60480",
+            "60011.8",
+            "60580.2",
+            "59753.8",
+            "206.83110107",
+            "12437010.88799251"
+          ]
+        ]
+      }
+    }
+  ],
+  "result": "PASS"
+}

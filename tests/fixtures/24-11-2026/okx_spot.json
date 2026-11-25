@@ -1,0 +1,236 @@
+{
+  "recorded_at": "2026-11-24T20:31:39+05:30",
+  "source_bases": [
+    "https://www.okx.com",
+    "https://www.okx.com"
+  ],
+  "requests": [
+    {
+      "market": "spot",
+      "path": "/api/v5/public/instruments",
+      "params": {
+        "instType": "SPOT"
+      },
+      "response": {
+        "code": "0",
+        "data": [
+          {
+            "alias": "",
+            "auctionEndTime": "",
+            "baseCcy": "BTC",
+            "category": "1",
+            "contTdSwTime": "",
+            "ctMult": "",
+            "ctType": "",
+            "ctVal": "",
+            "ctValCcy": "",
+            "expTime": "",
+            "floatPxLmtPct": "0.005",
+            "freq": "",
+            "futureSettlement": false,
+            "groupId": "12",
+            "initPxLmtPct": "",
+            "instCategory": "1",
+            "instFamily": "",
+            "instId": "BTC-USDT",
+            "instIdCode": 3,
+            "instType": "SPOT",
+            "lever": "10",
+            "listTime": "1611907686000",
+            "longPosRemainingQuota": "",
+            "lotSz": "0.00000001",
+            "maxIcebergSz": "9999999999.0000000000000000",
+            "maxLmtAmt": "20000000",
+            "maxLmtSz": "9999999999",
+            "maxMktAmt": "1000000",
+            "maxMktSz": "1000000",
+            "maxPlatOICoinLmt": "",
+            "maxPlatOILmt": "",
+            "maxPxLmtPct": "0.01",
+            "maxStopSz": "1000000",
+            "maxTriggerSz": "9999999999.0000000000000000",
+            "maxTwapSz": "9999999999.0000000000000000",
+            "method": "",
+            "minSz": "0.00001",
+            "openType": "fix_price",
+            "optType": "",
+            "posLmtAmt": "",
+            "posLmtPct": "",
+            "preMktSwTime": "",
+            "quoteCcy": "USDT",
+            "rpiMinLevel": "3",
+            "rpiMinPxBand": "20",
+            "ruleType": "normal",
+            "seriesId": "",
+            "settleCcy": "",
+            "shortPosRemainingQuota": "",
+            "state": "live",
+            "stk": "",
+            "tickSz": "0.1",
+            "tradeQuoteCcyList": [
+              "USDT"
+            ],
+            "uly": "",
+            "upcChg": []
+          },
+          {
+            "alias": "",
+            "auctionEndTime": "",
+            "baseCcy": "BTC",
+            "category": "1",
+            "contTdSwTime": "1790751600000",
+            "ctMult": "",
+            "ctType": "",
+            "ctVal": "",
+            "ctValCcy": "",
+            "expTime": "",
+            "floatPxLmtPct": "0.02",
+            "freq": "",
+            "futureSettlement": false,
+            "groupId": "11",
+            "initPxLmtPct": "0.1",
+            "instCategory": "1",
+            "instFamily": "",
+            "instId": "BTC-PLN",
+            "instIdCode": 485665,
+            "instType": "SPOT",
+            "lever": "",
+            "listTime": "1790748000000",
+            "longPosRemainingQuota": "",
+            "lotSz": "0.00000001",
+            "maxIcebergSz": "9999999999.0000000000000000",
+            "maxLmtAmt": "20000000",
+            "maxLmtSz": "9999999999",
+            "maxMktAmt": "1000000",
+            "maxMktSz": "1000000",
+            "maxPlatOICoinLmt": "",
+            "maxPlatOILmt": "",
+            "maxPxLmtPct": "0.05",
+            "maxStopSz": "1000000",
+            "maxTriggerSz": "9999999999.0000000000000000",
+            "maxTwapSz": "9999999999.0000000000000000",
+            "method": "",
+            "minSz": "0.00001",
+            "openType": "pre_quote",
+            "optType": "",
+            "posLmtAmt": "",
+            "posLmtPct": "",
+            "preMktSwTime": "",
+            "quoteCcy": "PLN",
+            "ruleType": "normal",
+            "seriesId": "",
+            "settleCcy": "",
+            "shortPosRemainingQuota": "",
+            "state": "live",
+            "stk": "",
+            "tickSz": "1",
+            "tradeQuoteCcyList": [
+              "PLN"
+            ],
+            "uly": "",
+            "upcChg": []
+          }
+        ],
+        "msg": ""
+      }
+    },
+    {
+      "market": "spot",
+      "path": "/api/v5/market/tickers",
+      "params": {
+        "instType": "SPOT"
+      },
+      "response": {
+        "code": "0",
+        "data": [
+          {
+            "instType": "SPOT",
+            "instId": "BTC-USDT",
+            "last": "60427.2",
+            "lastSz": "0.0000102",
+            "askPx": "60429.4",
+            "askSz": "0.33577987",
+            "bidPx": "60429.3",
+            "bidSz": "0.0604",
+            "open24h": "63099.3",
+            "high24h": "63666",
+            "low24h": "59391.3",
+            "volCcy24h": "581805574.583357508",
+            "vol24h": "9520.15580099",
+            "ts": "1795532498465",
+            "sodUtc0": "61272.9",
+            "sodUtc8": "62892.8"
+          },
+          {
+            "instType": "SPOT",
+            "instId": "BTC-USDC",
+            "last": "60370.8",
+            "lastSz": "0.00077",
+            "askPx": "60368.8",
+            "askSz": "0.03237842",
+            "bidPx": "60368.7",
+            "bidSz": "0.05815402",
+            "open24h": "63042.5",
+            "high24h": "63615.8",
+            "low24h": "59320.8",
+            "volCcy24h": "61856950.74506464",
+            "vol24h": "1015.84332767",
+            "ts": "1795532498467",
+            "sodUtc0": "61191.4",
+            "sodUtc8": "62843.7"
+          }
+        ],
+        "msg": ""
+      }
+    },
+    {
+      "market": "spot",
+      "path": "/api/v5/market/candles",
+      "params": {
+        "instId": "BTC-USDT",
+        "bar": "1H",
+        "limit": 200
+      },
+      "response": {
+        "code": "0",
+        "data": [
+          [
+            "1795532400000",
+            "60435.7",
+            "60533.3",
+            "60386.7",
+            "60417.6",
+            "16.31576821",
+            "986131.364955308",
+            "986131.364955308",
+            "0"
+          ],
+          [
+            "1795528800000",
+            "60013.7",
+            "60691.1",
+            "59979.5",
+            "60438.6",
+            "494.44079182",
+            "29846569.381739337",
+            "29846569.381739337",
+            "1"
+          ],
+          [
+            "1795525200000",
+            "60491.1",
+            "60591.9",
+            "59756.4",
+            "60014.7",
+            "594.62701114",
+            "35747540.057210285",
+            "35747540.057210285",
+            "1"
+          ]
+        ],
+        "msg": ""
+      }
+    }
+  ],
+  "result": "PASS"
+}

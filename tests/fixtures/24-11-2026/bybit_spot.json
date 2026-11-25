@@ -1,0 +1,185 @@
+{
+  "recorded_at": "2026-11-24T20:31:36+05:30",
+  "source_bases": [
+    "https://api.bybit.com",
+    "https://api.bybit.com"
+  ],
+  "requests": [
+    {
+      "market": "spot",
+      "path": "/v5/market/instruments-info",
+      "params": {
+        "category": "spot",
+        "limit": 1000
+      },
+      "response": {
+        "retCode": 0,
+        "retMsg": "OK",
+        "result": {
+          "category": "spot",
+          "list": [
+            {
+              "symbolId": 9,
+              "symbol": "BTCUSDT",
+              "baseCoin": "BTC",
+              "quoteCoin": "USDT",
+              "innovation": "0",
+              "status": "Trading",
+              "marginTrading": "utaOnly",
+              "stTag": "0",
+              "lotSizeFilter": {
+                "basePrecision": "0.000001",
+                "quotePrecision": "0.0000001",
+                "minOrderQty": "0.000001",
+                "maxOrderQty": "230",
+                "minOrderAmt": "5",
+                "maxOrderAmt": "8000000",
+                "maxLimitOrderQty": "230",
+                "maxMarketOrderQty": "120",
+                "postOnlyMaxLimitOrderSize": "1150"
+              },
+              "priceFilter": {
+                "tickSize": "0.1"
+              },
+              "riskParameters": {
+                "priceLimitRatioX": "0.005",
+                "priceLimitRatioY": "0.01"
+              },
+              "symbolType": "",
+              "xstockMultiplier": "1"
+            },
+            {
+              "symbolId": 13,
+              "symbol": "ETHBTC",
+              "baseCoin": "ETH",
+              "quoteCoin": "BTC",
+              "innovation": "0",
+              "status": "Trading",
+              "marginTrading": "utaOnly",
+              "stTag": "0",
+              "lotSizeFilter": {
+                "basePrecision": "0.00001",
+                "quotePrecision": "0.0000000001",
+                "minOrderQty": "0.00001",
+                "maxOrderQty": "771",
+                "minOrderAmt": "0.000065",
+                "maxOrderAmt": "10",
+                "maxLimitOrderQty": "771",
+                "maxMarketOrderQty": "257",
+                "postOnlyMaxLimitOrderSize": "3855"
+              },
+              "priceFilter": {
+                "tickSize": "0.00001"
+              },
+              "riskParameters": {
+                "priceLimitRatioX": "0.005",
+                "priceLimitRatioY": "0.01"
+              },
+              "symbolType": "",
+              "xstockMultiplier": "1"
+            }
+          ]
+        },
+        "retExtInfo": {},
+        "time": 1795532495317
+      }
+    },
+    {
+      "market": "spot",
+      "path": "/v5/market/tickers",
+      "params": {
+        "category": "spot"
+      },
+      "response": {
+        "retCode": 0,
+        "retMsg": "OK",
+        "result": {
+          "category": "spot",
+          "list": [
+            {
+              "symbol": "BTCUSDT",
+              "bid1Price": "60404.7",
+              "bid1Size": "0.756507",
+              "ask1Price": "60404.8",
+              "ask1Size": "0.358733",
+              "lastPrice": "60401.1",
+              "prevPrice24h": "62927.5",
+              "price24hPcnt": "-0.0401",
+              "highPrice24h": "63670.2",
+              "lowPrice24h": "59388.3",
+              "turnover24h": "1326378025.6465795",
+              "volume24h": "21817.908955",
+              "usdIndexPrice": "60354.045747"
+            },
+            {
+              "symbol": "XRPBTC",
+              "bid1Price": "0.00001526",
+              "bid1Size": "1535.92",
+              "ask1Price": "0.00001527",
+              "ask1Size": "3256.16",
+              "lastPrice": "0.00001527",
+              "prevPrice24h": "0.00001578",
+              "price24hPcnt": "-0.0323",
+              "highPrice24h": "0.00001587",
+              "lowPrice24h": "0.00001525",
+              "turnover24h": "15.9112053216",
+              "volume24h": "1022729.43"
+            }
+          ]
+        },
+        "retExtInfo": {},
+        "time": 1795532495670
+      }
+    },
+    {
+      "market": "spot",
+      "path": "/v5/market/kline",
+      "params": {
+        "category": "spot",
+        "symbol": "BTCUSDT",
+        "interval": "60",
+        "limit": 200
+      },
+      "response": {
+        "retCode": 0,
+        "retMsg": "OK",
+        "result": {
+          "category": "spot",
+          "symbol": "BTCUSDT",
+          "list": [
+            [
+              "1795532400000",
+              "60439.4",
+              "60541.4",
+              "60384.7",
+              "60407.3",
+              "40.187754",
+              "2428985.05548975"
+            ],
+            [
+              "1795528800000",
+              "60012.3",
+              "60698.3",
+              "59981.6",
+              "60439.4",
+              "1495.917627",
+              "90281528.74546273"
+            ],
+            [
+              "1795525200000",
+              "60487.9",
+              "60594",
+              "59750.1",
+              "60012.3",
+              "1770.132929",
+              "106422103.99639896"
+            ]
+          ]
+        },
+        "retExtInfo": {},
+        "time": 1795532496338
+      }
+    }
+  ],
+  "result": "PASS"
+}

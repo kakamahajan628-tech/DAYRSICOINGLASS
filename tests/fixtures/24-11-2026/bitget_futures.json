@@ -1,0 +1,799 @@
+{
+  "recorded_at": "2026-11-24T20:31:44+05:30",
+  "source_bases": [
+    "https://api.bitget.com",
+    "https://api.bitget.com"
+  ],
+  "requests": [
+    {
+      "market": "futures",
+      "path": "/api/v3/market/instruments",
+      "params": {
+        "category": "USDT-FUTURES"
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532499737,
+        "data": [
+          {
+            "symbol": "BTCUSDT",
+            "category": "USDT-FUTURES",
+            "baseCoin": "BTC",
+            "quoteCoin": "USDT",
+            "symbolType": "crypto",
+            "fullName": "Bitcoin",
+            "instrumentType": "crypto",
+            "marketRegion": null,
+            "isin": null,
+            "isRwa": "NO",
+            "buyLimitPriceRatio": "0.05",
+            "sellLimitPriceRatio": "0.05",
+            "feeRateUpRatio": "0.005",
+            "makerFeeRate": "0.0002",
+            "takerFeeRate": "0.0006",
+            "openCostUpRatio": "0.01",
+            "minOrderQty": "0.0001",
+            "maxOrderQty": "1200",
+            "pricePrecision": "1",
+            "quantityPrecision": "4",
+            "quotePrecision": "",
+            "priceMultiplier": "0.1",
+            "quantityMultiplier": "0.0001",
+            "type": "perpetual",
+            "minOrderAmount": "5",
+            "maxSymbolOrderNum": "",
+            "maxProductOrderNum": "400",
+            "maxPositionNum": "200",
+            "status": "online",
+            "offTime": "-1",
+            "limitOpenTime": "-1",
+            "deliveryTime": "",
+            "deliveryStartTime": "",
+            "deliveryPeriod": "",
+            "launchTime": "0",
+            "fundInterval": "8",
+            "minLeverage": "1",
+            "maxLeverage": "150",
+            "maintainTime": "",
+            "maxMarketOrderQty": "220",
+            "unrealizedProfitLimit": "NO"
+          },
+          {
+            "symbol": "AIXBTUSDT",
+            "category": "USDT-FUTURES",
+            "baseCoin": "AIXBT",
+            "quoteCoin": "USDT",
+            "symbolType": "crypto",
+            "fullName": "aixbt by Virtuals",
+            "instrumentType": "crypto",
+            "marketRegion": null,
+            "isin": null,
+            "isRwa": "NO",
+            "buyLimitPriceRatio": "0.15",
+            "sellLimitPriceRatio": "0.15",
+            "feeRateUpRatio": "0.005",
+            "makerFeeRate": "0.0002",
+            "takerFeeRate": "0.0006",
+            "openCostUpRatio": "0.01",
+            "minOrderQty": "1",
+            "maxOrderQty": "16000000",
+            "pricePrecision": "5",
+            "quantityPrecision": "0",
+            "quotePrecision": "",
+            "priceMultiplier": "0.00001",
+            "quantityMultiplier": "1",
+            "type": "perpetual",
+            "minOrderAmount": "5",
+            "maxSymbolOrderNum": "",
+            "maxProductOrderNum": "400",
+            "maxPositionNum": "200",
+            "status": "online",
+            "offTime": "-1",
+            "limitOpenTime": "-1",
+            "deliveryTime": "",
+            "deliveryStartTime": "",
+            "deliveryPeriod": "",
+            "launchTime": "1734753112837",
+            "fundInterval": "4",
+            "minLeverage": "1",
+            "maxLeverage": "20",
+            "maintainTime": "",
+            "maxMarketOrderQty": "4000000",
+            "unrealizedProfitLimit": "NO"
+          }
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/tickers",
+      "params": {
+        "category": "USDT-FUTURES"
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532500359,
+        "data": [
+          {
+            "category": "USDT-FUTURES",
+            "symbol": "BTCUSDT",
+            "ts": "1795532499574",
+            "lastPrice": "60402.1",
+            "openPrice24h": "63062.3",
+            "highPrice24h": "63638.2",
+            "lowPrice24h": "59355",
+            "ask1Price": "60407.7",
+            "bid1Price": "60407.6",
+            "bid1Size": "8.2477",
+            "ask1Size": "0.214",
+            "price24hPcnt": "-0.04218",
+            "volume24h": "60490.6008",
+            "turnover24h": "3683452513.58891",
+            "indexPrice": "60428.7258695652173914",
+            "markPrice": "60407.7",
+            "fundingRate": "-0.000024",
+            "openInterest": "36842.488499999986",
+            "deliveryStartTime": "",
+            "deliveryTime": "",
+            "deliveryStatus": ""
+          },
+          {
+            "category": "USDT-FUTURES",
+            "symbol": "AIXBTUSDT",
+            "ts": "1795532499575",
+            "lastPrice": "0.01183",
+            "openPrice24h": "0.01233",
+            "highPrice24h": "0.01239",
+            "lowPrice24h": "0.01162",
+            "ask1Price": "0.01181",
+            "bid1Price": "0.01179",
+            "bid1Size": "26635",
+            "ask1Size": "827107",
+            "price24hPcnt": "-0.04055",
+            "volume24h": "5300431",
+            "turnover24h": "63550.21903",
+            "indexPrice": "0.0118351851851852",
+            "markPrice": "0.01183",
+            "fundingRate": "0.000044",
+            "openInterest": "24328850",
+            "deliveryStartTime": "",
+            "deliveryTime": "",
+            "deliveryStatus": ""
+          }
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "1H",
+        "limit": 200
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532500744,
+        "data": [
+          [
+            "1794816000000",
+            "64949.8",
+            "64960.1",
+            "64394.2",
+            "64435.6",
+            "1128.9806",
+            "72930403.43983"
+          ],
+          [
+            "1794819600000",
+            "64435.6",
+            "64518.4",
+            "64088.9",
+            "64304.7",
+            "1994.1903",
+            "128207543.25566"
+          ],
+          [
+            "1794823200000",
+            "64304.7",
+            "64679",
+            "64278.3",
+            "64542.5",
+            "958.4286",
+            "61796629.50705"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1795532500956
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532501009,
+        "data": [
+          [
+            "1794081600000",
+            "75771.4",
+            "75899.4",
+            "75533.5",
+            "75835.3",
+            "1598.121",
+            "121002889.21572"
+          ],
+          [
+            "1794096000000",
+            "75835.3",
+            "75904.1",
+            "75625.9",
+            "75890.5",
+            "1248.0544",
+            "94552014.30006"
+          ],
+          [
+            "1794110400000",
+            "75890.5",
+            "75978.8",
+            "75745.2",
+            "75941.2",
+            "671.6393",
+            "50945487.46767"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1794081599999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532501256,
+        "data": [
+          [
+            "1792627200000",
+            "84054.9",
+            "84333.6",
+            "82651",
+            "82905.6",
+            "11339.2821",
+            "944619100.52157"
+          ],
+          [
+            "1792641600000",
+            "82905.6",
+            "82974.9",
+            "82092.8",
+            "82208.4",
+            "5927.9615",
+            "489219499.68382"
+          ],
+          [
+            "1792656000000",
+            "82208.4",
+            "82246.3",
+            "81610.3",
+            "81723",
+            "7674.5611",
+            "628816339.03301"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1792627199999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532501478,
+        "data": [
+          [
+            "1791172800000",
+            "86043.9",
+            "86458",
+            "85376.1",
+            "86222",
+            "9133.8615",
+            "784532521.75653"
+          ],
+          [
+            "1791187200000",
+            "86222",
+            "86464",
+            "85735.3",
+            "86175.5",
+            "4333.2183",
+            "372889475.92823"
+          ],
+          [
+            "1791201600000",
+            "86175.5",
+            "86688",
+            "85129.4",
+            "85223.9",
+            "10054.8185",
+            "863111143.89375"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1791172799999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532501731,
+        "data": [
+          [
+            "1789718400000",
+            "77768",
+            "78450",
+            "77622.1",
+            "78027.8",
+            "6614.7754",
+            "516634114.7325"
+          ],
+          [
+            "1789732800000",
+            "78027.8",
+            "81134.6",
+            "77927.9",
+            "80689.9",
+            "18993.4322",
+            "1518559802.33543"
+          ],
+          [
+            "1789747200000",
+            "80689.9",
+            "81386.4",
+            "80538.4",
+            "81169.3",
+            "6325.6175",
+            "512219094.46642"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1789718399999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532502020,
+        "data": [
+          [
+            "1788264000000",
+            "78063.1",
+            "78389.8",
+            "77450",
+            "77879.4",
+            "9415.0204",
+            "733804733.32556"
+          ],
+          [
+            "1788278400000",
+            "77879.4",
+            "77942.8",
+            "76370.1",
+            "77289.9",
+            "9335.7401",
+            "720007791.99816"
+          ],
+          [
+            "1788292800000",
+            "77289.9",
+            "77615.8",
+            "76875",
+            "77398.4",
+            "3685.968",
+            "284796120.57923"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1788263999999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532502284,
+        "data": [
+          [
+            "1786809600000",
+            "63069.2",
+            "63101.3",
+            "63013",
+            "63099.4",
+            "686.2063",
+            "43273994.3325"
+          ],
+          [
+            "1786824000000",
+            "63099.4",
+            "63141.8",
+            "63047.6",
+            "63057",
+            "600.2042",
+            "37870951.63077"
+          ],
+          [
+            "1786838400000",
+            "63057",
+            "63125",
+            "62981",
+            "63102.3",
+            "867.9615",
+            "54735402.88451"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1786809599999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532502545,
+        "data": [
+          [
+            "1785355200000",
+            "63562",
+            "64100",
+            "63220.1",
+            "63951.8",
+            "5985.6769",
+            "381169876.96586"
+          ],
+          [
+            "1785369600000",
+            "63951.8",
+            "64398",
+            "63580",
+            "64136.9",
+            "5258.2679",
+            "336733575.25541"
+          ],
+          [
+            "1785384000000",
+            "64136.9",
+            "64157",
+            "63880",
+            "63979.4",
+            "2848.4817",
+            "182329198.71191"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1785355199999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532502897,
+        "data": [
+          [
+            "1783900800000",
+            "63752",
+            "64413.5",
+            "62715.1",
+            "62788.3",
+            "13544.2524",
+            "859596718.60103"
+          ],
+          [
+            "1783915200000",
+            "62788.3",
+            "63043.7",
+            "62457.6",
+            "62964.9",
+            "7327.2226",
+            "459934814.15617"
+          ],
+          [
+            "1783929600000",
+            "62964.9",
+            "63267",
+            "62828.4",
+            "62874.1",
+            "4810.974",
+            "303286975.84832"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1783900799999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532503454,
+        "data": [
+          [
+            "1782446400000",
+            "60006.1",
+            "60744",
+            "59667.4",
+            "60487",
+            "10637.4829",
+            "639834992.38121"
+          ],
+          [
+            "1782460800000",
+            "60487",
+            "60541.4",
+            "59216.9",
+            "59394.6",
+            "9817.4232",
+            "587211541.31318"
+          ],
+          [
+            "1782475200000",
+            "59394.6",
+            "60480",
+            "58477",
+            "60294.1",
+            "22291.8855",
+            "1327859803.22592"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1782446399999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532503700,
+        "data": [
+          [
+            "1780992000000",
+            "63167.8",
+            "63180",
+            "62467",
+            "62684.1",
+            "9453.5144",
+            "593216630.9582"
+          ],
+          [
+            "1781006400000",
+            "62684.1",
+            "62868.9",
+            "61000.7",
+            "61106.6",
+            "21753.5672",
+            "1345259786.24194"
+          ],
+          [
+            "1781020800000",
+            "61106.6",
+            "62080",
+            "60750.4",
+            "62063.1",
+            "13803.7599",
+            "847675391.5121"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1780991999999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532503952,
+        "data": [
+          [
+            "1779537600000",
+            "74753.3",
+            "75655.5",
+            "74616",
+            "75478",
+            "9236.5045",
+            "694992421.01629"
+          ],
+          [
+            "1779552000000",
+            "75478",
+            "75975.2",
+            "75308.4",
+            "75942.9",
+            "5642.2485",
+            "427072279.03239"
+          ],
+          [
+            "1779566400000",
+            "75942.9",
+            "77365.4",
+            "75901.5",
+            "76701.4",
+            "15221.3219",
+            "1166896315.97842"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1779537599999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532504455,
+        "data": [
+          [
+            "1778083200000",
+            "81659.2",
+            "81853.8",
+            "81140.5",
+            "81413.9",
+            "4183.0521",
+            "340915915.33389"
+          ],
+          [
+            "1778097600000",
+            "81413.9",
+            "81663.2",
+            "80943.3",
+            "81396.3",
+            "3162.3162",
+            "257074579.53452"
+          ],
+          [
+            "1778112000000",
+            "81396.3",
+            "81450.9",
+            "80760",
+            "80802.4",
+            "4933.7481",
+            "399697484.41974"
+          ]
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/api/v3/market/history-candles",
+      "params": {
+        "category": "USDT-FUTURES",
+        "symbol": "BTCUSDT",
+        "interval": "4H",
+        "limit": 100,
+        "endTime": 1778083199999
+      },
+      "response": {
+        "code": "00000",
+        "msg": "success",
+        "requestTime": 1795532504748,
+        "data": [
+          [
+            "1776628800000",
+            "74922.2",
+            "74926.8",
+            "73723.3",
+            "73768.3",
+            "8994.6062",
+            "667020716.96076"
+          ],
+          [
+            "1776643200000",
+            "73768.3",
+            "74729.5",
+            "73670",
+            "74598.6",
+            "5841.8406",
+            "433990824.32937"
+          ],
+          [
+            "1776657600000",
+            "74598.6",
+            "75532.8",
+            "74063",
+            "74791.6",
+            "7517.1134",
+            "562105018.75274"
+          ]
+        ]
+      }
+    }
+  ],
+  "result": "PASS"
+}

@@ -1,0 +1,263 @@
+{
+  "recorded_at": "2026-11-24T20:31:35+05:30",
+  "source_bases": [
+    "https://api.bybit.com",
+    "https://api.bybit.com"
+  ],
+  "requests": [
+    {
+      "market": "futures",
+      "path": "/v5/market/instruments-info",
+      "params": {
+        "category": "linear",
+        "limit": 1000
+      },
+      "response": {
+        "retCode": 0,
+        "retMsg": "OK",
+        "result": {
+          "category": "linear",
+          "list": [
+            {
+              "symbol": "BTCUSDT",
+              "contractType": "LinearPerpetual",
+              "status": "Trading",
+              "baseCoin": "BTC",
+              "quoteCoin": "USDT",
+              "launchTime": "1584230400000",
+              "deliveryTime": "0",
+              "deliveryFeeRate": "",
+              "priceScale": "2",
+              "leverageFilter": {
+                "minLeverage": "1",
+                "maxLeverage": "150.00",
+                "leverageStep": "0.01"
+              },
+              "priceFilter": {
+                "minPrice": "0.10",
+                "maxPrice": "1999999.80",
+                "tickSize": "0.10"
+              },
+              "lotSizeFilter": {
+                "maxOrderQty": "1500.000",
+                "minOrderQty": "0.001",
+                "qtyStep": "0.001",
+                "postOnlyMaxOrderQty": "1500.000",
+                "maxMktOrderQty": "150.000",
+                "minNotionalValue": "5"
+              },
+              "unifiedMarginTrade": true,
+              "fundingInterval": 480,
+              "settleCoin": "USDT",
+              "copyTrading": "both",
+              "upperFundingRate": "0.00333",
+              "lowerFundingRate": "-0.00333",
+              "isPreListing": false,
+              "preListingInfo": null,
+              "riskParameters": {
+                "priceLimitRatioX": "0.01",
+                "priceLimitRatioY": "0.02"
+              },
+              "displayName": "BTCUSDT",
+              "symbolType": "",
+              "forbidUplWithdrawal": false,
+              "symbolId": 5,
+              "fullName": "Bitcoin",
+              "marketRegion": "",
+              "underlyingTicker": "",
+              "tags": []
+            },
+            {
+              "symbol": "AIXBTUSDT",
+              "contractType": "LinearPerpetual",
+              "status": "Trading",
+              "baseCoin": "AIXBT",
+              "quoteCoin": "USDT",
+              "launchTime": "1734683907000",
+              "deliveryTime": "0",
+              "deliveryFeeRate": "",
+              "priceScale": "6",
+              "leverageFilter": {
+                "minLeverage": "1",
+                "maxLeverage": "25.00",
+                "leverageStep": "0.01"
+              },
+              "priceFilter": {
+                "minPrice": "0.000010",
+                "maxPrice": "199.999980",
+                "tickSize": "0.000010"
+              },
+              "lotSizeFilter": {
+                "maxOrderQty": "6075000",
+                "minOrderQty": "10",
+                "qtyStep": "10",
+                "postOnlyMaxOrderQty": "6075000",
+                "maxMktOrderQty": "1215000",
+                "minNotionalValue": "5"
+              },
+              "unifiedMarginTrade": true,
+              "fundingInterval": 240,
+              "settleCoin": "USDT",
+              "copyTrading": "both",
+              "upperFundingRate": "0.02",
+              "lowerFundingRate": "-0.02",
+              "isPreListing": false,
+              "preListingInfo": null,
+              "riskParameters": {
+                "priceLimitRatioX": "0.1",
+                "priceLimitRatioY": "0.2"
+              },
+              "displayName": "AIXBTUSDT",
+              "symbolType": "",
+              "forbidUplWithdrawal": false,
+              "symbolId": 545,
+              "fullName": "aixbt by Virtuals",
+              "marketRegion": "",
+              "underlyingTicker": "",
+              "tags": []
+            }
+          ],
+          "nextPageCursor": ""
+        },
+        "retExtInfo": {},
+        "time": 1795532493804
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/v5/market/tickers",
+      "params": {
+        "category": "linear"
+      },
+      "response": {
+        "retCode": 0,
+        "retMsg": "OK",
+        "result": {
+          "category": "linear",
+          "list": [
+            {
+              "symbol": "BTCUSDT",
+              "lastPrice": "60388.80",
+              "indexPrice": "60416.98",
+              "markPrice": "60390.59",
+              "prevPrice24h": "62898.00",
+              "price24hPcnt": "-0.039893",
+              "highPrice24h": "63643.20",
+              "lowPrice24h": "59360.30",
+              "prevPrice1h": "59987.90",
+              "openInterest": "67810.343",
+              "openInterestValue": "4095106621.87",
+              "singleOpenInterest": "33905.172",
+              "singleOpenInterestValue": "2047553341.13",
+              "turnover24h": "6684447133.1373",
+              "volume24h": "109739.6460",
+              "fundingRate": "0.00003692",
+              "nextFundingTime": "1795536000000",
+              "predictedDeliveryPrice": "",
+              "basisRate": "",
+              "deliveryFeeRate": "",
+              "deliveryTime": "0",
+              "ask1Size": "1.110",
+              "bid1Price": "60388.80",
+              "ask1Price": "60388.90",
+              "bid1Size": "2.884",
+              "basis": "",
+              "preOpenPrice": "",
+              "preQty": "",
+              "curPreListingPhase": "",
+              "fundingIntervalHour": "8",
+              "basisRateYear": "",
+              "fundingCap": "0.00333"
+            },
+            {
+              "symbol": "AIXBTUSDT",
+              "lastPrice": "0.011820",
+              "indexPrice": "0.011813",
+              "markPrice": "0.011813",
+              "prevPrice24h": "0.012380",
+              "price24hPcnt": "-0.045234",
+              "highPrice24h": "0.012420",
+              "lowPrice24h": "0.011580",
+              "prevPrice1h": "0.011710",
+              "openInterest": "29743900",
+              "openInterestValue": "351364.69",
+              "singleOpenInterest": "14871950",
+              "singleOpenInterestValue": "175682.35",
+              "turnover24h": "350132.5084",
+              "volume24h": "29229700.0000",
+              "fundingRate": "-0.00007934",
+              "nextFundingTime": "1795536000000",
+              "predictedDeliveryPrice": "",
+              "basisRate": "",
+              "deliveryFeeRate": "",
+              "deliveryTime": "0",
+              "ask1Size": "101590",
+              "bid1Price": "0.011770",
+              "ask1Price": "0.011790",
+              "bid1Size": "51220",
+              "basis": "",
+              "preOpenPrice": "",
+              "preQty": "",
+              "curPreListingPhase": "",
+              "fundingIntervalHour": "4",
+              "basisRateYear": "",
+              "fundingCap": "0.02"
+            }
+          ]
+        },
+        "retExtInfo": {},
+        "time": 1795532494263
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/v5/market/kline",
+      "params": {
+        "category": "linear",
+        "symbol": "BTCUSDT",
+        "interval": "60",
+        "limit": 200
+      },
+      "response": {
+        "retCode": 0,
+        "retMsg": "OK",
+        "result": {
+          "symbol": "BTCUSDT",
+          "category": "linear",
+          "list": [
+            [
+              "1795532400000",
+              "60413.1",
+              "60509.5",
+              "60354.9",
+              "60385.8",
+              "296",
+              "17885759.9868"
+            ],
+            [
+              "1795528800000",
+              "59987.9",
+              "60666.5",
+              "59951.2",
+              "60413.1",
+              "6744.502",
+              "406844846.7995"
+            ],
+            [
+              "1795525200000",
+              "60461.5",
+              "60558.8",
+              "59716.9",
+              "59987.9",
+              "8272.676",
+              "496874277.6372"
+            ]
+          ]
+        },
+        "retExtInfo": {},
+        "time": 1795532495123
+      }
+    }
+  ],
+  "result": "PASS"
+}

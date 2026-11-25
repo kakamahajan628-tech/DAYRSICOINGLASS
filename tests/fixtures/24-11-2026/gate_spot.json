@@ -1,0 +1,138 @@
+{
+  "recorded_at": "2026-11-24T20:31:58+05:30",
+  "source_bases": [
+    "https://api.gateio.ws/api/v4",
+    "https://api.gateio.ws/api/v4"
+  ],
+  "requests": [
+    {
+      "market": "spot",
+      "path": "/spot/currency_pairs",
+      "params": {},
+      "response": [
+        {
+          "id": "BTC_USDT",
+          "base": "BTC",
+          "base_name": "Bitcoin",
+          "quote": "USDT",
+          "quote_name": "Tether",
+          "trade_quotes": [],
+          "fee": "0.2",
+          "min_base_amount": "0.000001",
+          "min_quote_amount": "3",
+          "max_base_amount": "100",
+          "max_quote_amount": "5000000",
+          "amount_precision": 6,
+          "precision": 1,
+          "trade_status": "tradable",
+          "sell_start": 0,
+          "buy_start": 0,
+          "type": "normal",
+          "trade_url": "https://www.gate.com/trade/BTC_USDT",
+          "st_tag": false,
+          "up_rate": "0.08",
+          "down_rate": "0.08",
+          "slippage": "0.03",
+          "market_order_max_stock": "61",
+          "market_order_max_money": "5000000"
+        },
+        {
+          "id": "LTC_BTC",
+          "base": "LTC",
+          "base_name": "Litecoin",
+          "quote": "BTC",
+          "quote_name": "Bitcoin",
+          "trade_quotes": [],
+          "fee": "0.2",
+          "min_base_amount": "0.0001",
+          "min_quote_amount": "0.000001",
+          "max_quote_amount": "100",
+          "amount_precision": 4,
+          "precision": 7,
+          "trade_status": "tradable",
+          "sell_start": 0,
+          "buy_start": 0,
+          "type": "normal",
+          "trade_url": "https://www.gate.com/trade/LTC_BTC",
+          "st_tag": false,
+          "up_rate": "0.25",
+          "down_rate": "0.25",
+          "slippage": "0.06",
+          "market_order_max_stock": "1720",
+          "market_order_max_money": "1.25"
+        }
+      ]
+    },
+    {
+      "market": "spot",
+      "path": "/spot/tickers",
+      "params": {},
+      "response": [
+        {
+          "currency_pair": "BTC_USDT",
+          "last": "60424.3",
+          "lowest_ask": "60404.3",
+          "highest_bid": "60404.2",
+          "change_percentage": "-4.13",
+          "base_volume": "19547.778086",
+          "quote_volume": "1190709001.2546427",
+          "high_24h": "63663",
+          "low_24h": "59392.8"
+        },
+        {
+          "currency_pair": "ASTR_BTC",
+          "last": "0.00000007398",
+          "lowest_ask": "0.00000007423",
+          "highest_bid": "0.00000007407",
+          "change_percentage": "2.5",
+          "base_volume": "48897",
+          "quote_volume": "0.00355541014",
+          "high_24h": "0.000000074",
+          "low_24h": "0.00000007151"
+        }
+      ]
+    },
+    {
+      "market": "spot",
+      "path": "/spot/candlesticks",
+      "params": {
+        "currency_pair": "BTC_USDT",
+        "interval": "1h",
+        "limit": 200
+      },
+      "response": [
+        [
+          "1794816000",
+          "27734377.87457910",
+          "64464.5",
+          "64991.9",
+          "64423.5",
+          "64986.1",
+          "429.07476800",
+          "true"
+        ],
+        [
+          "1794819600",
+          "42833783.33910930",
+          "64328.1",
+          "64544.9",
+          "64126",
+          "64464.5",
+          "665.72595900",
+          "true"
+        ],
+        [
+          "1794823200",
+          "36681648.41347740",
+          "64570.9",
+          "64696.3",
+          "64313",
+          "64328.2",
+          "568.88986500",
+          "true"
+        ]
+      ]
+    }
+  ],
+  "result": "PASS"
+}

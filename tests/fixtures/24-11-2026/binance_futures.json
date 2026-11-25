@@ -1,0 +1,292 @@
+{
+  "recorded_at": "2026-11-24T20:31:28+05:30",
+  "source_bases": [
+    "https://fapi.binance.com",
+    "https://data-api.binance.vision"
+  ],
+  "requests": [
+    {
+      "market": "futures",
+      "path": "/fapi/v1/exchangeInfo",
+      "params": {},
+      "response": {
+        "timezone": "UTC",
+        "serverTime": 1795525258054,
+        "futuresType": "U_MARGINED",
+        "rateLimits": [
+          {
+            "rateLimitType": "REQUEST_WEIGHT",
+            "interval": "MINUTE",
+            "intervalNum": 1,
+            "limit": 2400
+          },
+          {
+            "rateLimitType": "ORDERS",
+            "interval": "MINUTE",
+            "intervalNum": 1,
+            "limit": 1200
+          },
+          {
+            "rateLimitType": "ORDERS",
+            "interval": "SECOND",
+            "intervalNum": 10,
+            "limit": 300
+          }
+        ],
+        "exchangeFilters": [],
+        "assets": [
+          {
+            "asset": "USDT",
+            "marginAvailable": true,
+            "autoAssetExchange": "-10000"
+          },
+          {
+            "asset": "BTC",
+            "marginAvailable": true,
+            "autoAssetExchange": "-0.10000000"
+          },
+          {
+            "asset": "BNB",
+            "marginAvailable": true,
+            "autoAssetExchange": "0"
+          }
+        ],
+        "symbols": [
+          {
+            "symbol": "BTCUSDT",
+            "pair": "BTCUSDT",
+            "contractType": "PERPETUAL",
+            "deliveryDate": 4133404800000,
+            "onboardDate": 1567965300000,
+            "status": "TRADING",
+            "maintMarginPercent": "2.5000",
+            "requiredMarginPercent": "5.0000",
+            "baseAsset": "BTC",
+            "quoteAsset": "USDT",
+            "marginAsset": "USDT",
+            "pricePrecision": 2,
+            "quantityPrecision": 3,
+            "baseAssetPrecision": 8,
+            "quotePrecision": 8,
+            "underlyingType": "COIN",
+            "underlyingSubType": [
+              "PoW",
+              "Crypto"
+            ],
+            "triggerProtect": "0.0300",
+            "liquidationFee": "0.012500",
+            "marketTakeBound": "0.03",
+            "maxMoveOrderLimit": 10000,
+            "filters": [
+              {
+                "tickSize": "0.10",
+                "minPrice": "556.80",
+                "filterType": "PRICE_FILTER",
+                "maxPrice": "4529764"
+              },
+              {
+                "minQty": "0.001",
+                "stepSize": "0.001",
+                "maxQty": "1000",
+                "filterType": "LOT_SIZE"
+              },
+              {
+                "filterType": "MARKET_LOT_SIZE",
+                "maxQty": "120",
+                "minQty": "0.001",
+                "stepSize": "0.001"
+              }
+            ],
+            "orderTypes": [
+              "LIMIT",
+              "MARKET",
+              "STOP",
+              "STOP_MARKET",
+              "TAKE_PROFIT",
+              "TAKE_PROFIT_MARKET",
+              "TRAILING_STOP_MARKET"
+            ],
+            "timeInForce": [
+              "GTC",
+              "IOC",
+              "FOK",
+              "GTX",
+              "GTD"
+            ],
+            "permissionSets": [
+              "GRID",
+              "COPY",
+              "DCA",
+              "PSB"
+            ]
+          },
+          {
+            "symbol": "BTCDOMUSDT",
+            "pair": "BTCDOMUSDT",
+            "contractType": "PERPETUAL",
+            "deliveryDate": 4133404800000,
+            "onboardDate": 1623913200000,
+            "status": "TRADING",
+            "maintMarginPercent": "2.5000",
+            "requiredMarginPercent": "5.0000",
+            "baseAsset": "BTCDOM",
+            "quoteAsset": "USDT",
+            "marginAsset": "USDT",
+            "pricePrecision": 1,
+            "quantityPrecision": 3,
+            "baseAssetPrecision": 8,
+            "quotePrecision": 8,
+            "underlyingType": "INDEX",
+            "underlyingSubType": [
+              "Index",
+              "Crypto"
+            ],
+            "triggerProtect": "0.1000",
+            "liquidationFee": "0.020000",
+            "marketTakeBound": "0.10",
+            "maxMoveOrderLimit": 10000,
+            "filters": [
+              {
+                "tickSize": "0.1",
+                "minPrice": "10",
+                "filterType": "PRICE_FILTER",
+                "maxPrice": "200000"
+              },
+              {
+                "minQty": "0.001",
+                "stepSize": "0.001",
+                "maxQty": "300",
+                "filterType": "LOT_SIZE"
+              },
+              {
+                "minQty": "0.001",
+                "maxQty": "50",
+                "filterType": "MARKET_LOT_SIZE",
+                "stepSize": "0.001"
+              }
+            ],
+            "orderTypes": [
+              "LIMIT",
+              "MARKET",
+              "STOP",
+              "STOP_MARKET",
+              "TAKE_PROFIT",
+              "TAKE_PROFIT_MARKET",
+              "TRAILING_STOP_MARKET"
+            ],
+            "timeInForce": [
+              "GTC",
+              "IOC",
+              "FOK",
+              "GTX",
+              "GTD"
+            ],
+            "permissionSets": [
+              "GRID",
+              "COPY",
+              "DCA",
+              "PSB"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "market": "futures",
+      "path": "/fapi/v1/ticker/24hr",
+      "params": {},
+      "response": [
+        {
+          "closeTime": 1795532485596,
+          "count": 6507510,
+          "firstId": 8326567144,
+          "highPrice": "63637.70",
+          "lastId": 8333075256,
+          "lastPrice": "60399.90",
+          "lastQty": "0.003",
+          "lowPrice": "59366.00",
+          "openPrice": "62901.10",
+          "openTime": 1795446060000,
+          "priceChange": "-2501.20",
+          "priceChangePercent": "-3.976",
+          "quoteVolume": "16655798892.50",
+          "symbol": "BTCUSDT",
+          "volume": "273294.246",
+          "weightedAvgPrice": "60944.56"
+        },
+        {
+          "closeTime": 1795532485640,
+          "count": 24503,
+          "firstId": 92602352,
+          "highPrice": "5837.1",
+          "lastId": 92626858,
+          "lastPrice": "5836.4",
+          "lastQty": "0.001",
+          "lowPrice": "5714.4",
+          "openPrice": "5730.9",
+          "openTime": 1795446060000,
+          "priceChange": "105.5",
+          "priceChangePercent": "1.841",
+          "quoteVolume": "2112217.6",
+          "symbol": "BTCDOMUSDT",
+          "volume": "365.356",
+          "weightedAvgPrice": "5781.3"
+        }
+      ]
+    },
+    {
+      "market": "futures",
+      "path": "/fapi/v1/klines",
+      "params": {
+        "symbol": "BTCUSDT",
+        "interval": "1h",
+        "limit": 200
+      },
+      "response": [
+        [
+          1794816000000,
+          "64954.60",
+          "64962.00",
+          "64387.80",
+          "64431.00",
+          "7337.664",
+          1794819599999,
+          "474088570.16450",
+          163889,
+          "2966.092",
+          "191603538.70530",
+          "0"
+        ],
+        [
+          1794819600000,
+          "64430.90",
+          "64511.40",
+          "64073.70",
+          "64298.10",
+          "9127.682",
+          1794823199999,
+          "586908904.42380",
+          220175,
+          "4570.450",
+          "293941472.89300",
+          "0"
+        ],
+        [
+          1794823200000,
+          "64298.20",
+          "64671.80",
+          "64272.90",
+          "64542.40",
+          "3994.208",
+          1794826799999,
+          "257480383.60730",
+          138196,
+          "2020.797",
+          "130271501.07510",
+          "0"
+        ]
+      ]
+    }
+  ],
+  "result": "PASS"
+}
