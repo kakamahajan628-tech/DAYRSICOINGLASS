@@ -1,0 +1,217 @@
+{
+  "checked_at": "2026-11-24T20:44:11+05:30",
+  "duration_seconds": 19.4,
+  "location": "Machine running this command; not evidence of access from another hosting region",
+  "exchanges": [
+    {
+      "exchange": "Binance",
+      "catalogs": {
+        "futures": 522,
+        "spot": 526
+      },
+      "errors": {},
+      "selected_status": "OK",
+      "market": "futures",
+      "frames": {
+        "1h": {
+          "status": "PASS",
+          "rsi": 46.38491105991422,
+          "mfi": 39.573798719470396,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T20:30:00+05:30"
+        },
+        "4h": {
+          "status": "PASS",
+          "rsi": 45.2672877117753,
+          "mfi": 58.57053794431311,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T17:30:00+05:30"
+        },
+        "1d": {
+          "status": "PASS",
+          "rsi": 26.579033094925734,
+          "mfi": 24.170058362318215,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T05:30:00+05:30"
+        }
+      }
+    },
+    {
+      "exchange": "Bybit",
+      "catalogs": {
+        "futures": 834,
+        "spot": 389
+      },
+      "errors": {},
+      "selected_status": "OK",
+      "market": "futures",
+      "frames": {
+        "1h": {
+          "status": "PASS",
+          "rsi": 46.51267776354104,
+          "mfi": 37.06996460499883,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T20:30:00+05:30"
+        },
+        "4h": {
+          "status": "PASS",
+          "rsi": 45.31859632502956,
+          "mfi": 61.84162451005055,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T17:30:00+05:30"
+        },
+        "1d": {
+          "status": "PASS",
+          "rsi": 26.640192682153753,
+          "mfi": 24.143835503333776,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T05:30:00+05:30"
+        }
+      }
+    },
+    {
+      "exchange": "OKX",
+      "catalogs": {
+        "futures": 535,
+        "spot": 498
+      },
+      "errors": {},
+      "selected_status": "OK",
+      "market": "futures",
+      "frames": {
+        "1h": {
+          "status": "PASS",
+          "rsi": 46.348238074888116,
+          "mfi": 36.04717505106905,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T20:30:00+05:30"
+        },
+        "4h": {
+          "status": "PASS",
+          "rsi": 45.259307475647994,
+          "mfi": 63.5058112746726,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T17:30:00+05:30"
+        },
+        "1d": {
+          "status": "PASS",
+          "rsi": 26.599462113903826,
+          "mfi": 24.5975841788496,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T05:30:00+05:30"
+        }
+      }
+    },
+    {
+      "exchange": "Bitget",
+      "catalogs": {
+        "futures": 464,
+        "spot": 492
+      },
+      "errors": {},
+      "selected_status": "OK",
+      "market": "futures",
+      "frames": {
+        "1h": {
+          "status": "PASS",
+          "rsi": 46.38857806479547,
+          "mfi": 36.75514556415482,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T20:30:00+05:30"
+        },
+        "4h": {
+          "status": "PASS",
+          "rsi": 45.27261121446789,
+          "mfi": 64.3672370627294,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T17:30:00+05:30"
+        },
+        "1d": {
+          "status": "UNAVAILABLE",
+          "reason": "CANDLE_GAP"
+        }
+      }
+    },
+    {
+      "exchange": "Gate",
+      "catalogs": {
+        "futures": 1036,
+        "spot": 2008
+      },
+      "errors": {},
+      "selected_status": "OK",
+      "market": "futures",
+      "frames": {
+        "1h": {
+          "status": "PASS",
+          "rsi": 46.413795883483296,
+          "mfi": 36.48684361305035,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T20:30:00+05:30"
+        },
+        "4h": {
+          "status": "PASS",
+          "rsi": 45.25559273518329,
+          "mfi": 61.683492874793224,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T17:30:00+05:30"
+        },
+        "1d": {
+          "status": "PASS",
+          "rsi": 26.60944472063008,
+          "mfi": 24.84988103933094,
+          "history_bars": 199,
+          "bar_close_ist": "2026-11-24T05:30:00+05:30"
+        }
+      }
+    },
+    {
+      "exchange": "KuCoin",
+      "catalogs": {
+        "futures": 515,
+        "spot": 814
+      },
+      "errors": {},
+      "selected_status": "OK",
+      "market": "futures",
+      "frames": {
+        "1h": {
+          "status": "PASS",
+          "rsi": 46.532765289123645,
+          "mfi": 37.255622520209954,
+          "history_bars": 200,
+          "bar_close_ist": "2026-11-24T20:30:00+05:30"
+        },
+        "4h": {
+          "status": "PASS",
+          "rsi": 45.263289744070335,
+          "mfi": 61.62201201745345,
+          "history_bars": 200,
+          "bar_close_ist": "2026-11-24T17:30:00+05:30"
+        },
+        "1d": {
+          "status": "PASS",
+          "rsi": 26.61641501104451,
+          "mfi": 21.59084830044131,
+          "history_bars": 200,
+          "bar_close_ist": "2026-11-24T05:30:00+05:30"
+        }
+      }
+    }
+  ],
+  "cmc": {
+    "status": "PASS",
+    "coins": 500,
+    "verification": {
+      "mode": "COMPLETE_INVENTORY",
+      "reported_total": 7878,
+      "unique_ids": 7878,
+      "eligible_crypto": 6695,
+      "selected": 500,
+      "source_rank_used": false,
+      "exchange_universe_fallback": false
+    },
+    "captured_at": "2026-11-24T20:44:11+05:30"
+  },
+  "coinglass": "Optional, not launched by preflight"
+}
